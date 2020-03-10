@@ -11,17 +11,17 @@ std::vector<Console::TextData*> g_VecTextData;
 
 std::string Console::GetTime() 
 {
-	time_t rawtime;
-	struct tm* timeinfo;
-	char buffer[80];
+    time_t rawtime;
+    struct tm* timeinfo;
+    char buffer[80];
 
-	time(&rawtime);
-	timeinfo = localtime(&rawtime);
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
 
-	strftime(buffer, sizeof(buffer), "%H:%M:%S", timeinfo);
-	std::string str(buffer);
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", timeinfo);
+    std::string str(buffer);
 
-	return str;
+    return str;
 }
 
 void Console::Clean() 
@@ -32,7 +32,7 @@ void Console::Clean()
 void Console::WriteLog(const char* text, ...) 
 {
     char buffer[256];
-    
+
     va_list argptr;
     va_start(argptr, text);
     vsnprintf(buffer, 255, text, argptr);
