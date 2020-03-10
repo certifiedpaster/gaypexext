@@ -1,0 +1,3 @@
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles/xepa.exe.dir
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles/edit_cache.dir
