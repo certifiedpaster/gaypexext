@@ -177,6 +177,33 @@ src/driver.cc.s:
 	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/driver.cc.s
 .PHONY : src/driver.cc.s
 
+src/features/base.o: src/features/base.cc.o
+
+.PHONY : src/features/base.o
+
+# target to build an object file
+src/features/base.cc.o:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/features/base.cc.o
+.PHONY : src/features/base.cc.o
+
+src/features/base.i: src/features/base.cc.i
+
+.PHONY : src/features/base.i
+
+# target to preprocess a source file
+src/features/base.cc.i:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/features/base.cc.i
+.PHONY : src/features/base.cc.i
+
+src/features/base.s: src/features/base.cc.s
+
+.PHONY : src/features/base.s
+
+# target to generate assembly for a file
+src/features/base.cc.s:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/features/base.cc.s
+.PHONY : src/features/base.cc.s
+
 src/imgui/imgui.o: src/imgui/imgui.cc.o
 
 .PHONY : src/imgui/imgui.o
@@ -393,6 +420,33 @@ src/overlay.cc.s:
 	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/overlay.cc.s
 .PHONY : src/overlay.cc.s
 
+src/utils.o: src/utils.cc.o
+
+.PHONY : src/utils.o
+
+# target to build an object file
+src/utils.cc.o:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/utils.cc.o
+.PHONY : src/utils.cc.o
+
+src/utils.i: src/utils.cc.i
+
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cc.i:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/utils.cc.i
+.PHONY : src/utils.cc.i
+
+src/utils.s: src/utils.cc.s
+
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cc.s:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/utils.cc.s
+.PHONY : src/utils.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -408,6 +462,9 @@ help:
 	@echo "... src/driver.o"
 	@echo "... src/driver.i"
 	@echo "... src/driver.s"
+	@echo "... src/features/base.o"
+	@echo "... src/features/base.i"
+	@echo "... src/features/base.s"
 	@echo "... src/imgui/imgui.o"
 	@echo "... src/imgui/imgui.i"
 	@echo "... src/imgui/imgui.s"
@@ -432,6 +489,9 @@ help:
 	@echo "... src/overlay.o"
 	@echo "... src/overlay.i"
 	@echo "... src/overlay.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 

@@ -8,6 +8,7 @@ class Driver
 private:
     HANDLE _handle;
     ULONG _pid;
+    bool _init;
 
     typedef struct _DrvIO
     {
@@ -32,8 +33,27 @@ private:
     void UnsafeWrite(PVOID pTarget, PVOID pLocal, ULONG DataSize);
     DrvAllocFreeInfo UnsafeAlloc(ULONG RegSize);
 public:
-    void Init();
+    void Init(int pid);
 
+    template<typename T>
+    T Read(uintptr_t address) 
+    {
+        T val = T();    
+        if (!_init) 
+            return val;
+
+        UnsafeRead((PVOID)address, (PVOID)&val, sizeof(T));
+        return val;
+    }
+
+    template<typename T>
+    void Write(uintptr_t address, T val) 
+    {
+        if (!_init) 
+            return;
+
+        UnsafeWrite((PVOID)address, (PVOID)&val, sizeof(T));
+    }
 };
 
 #endif

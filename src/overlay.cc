@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "overlay.h"
 #include "console.h"
+#include "features/base.h"
 #define IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_dx9.h"
@@ -91,7 +92,7 @@ void Overlay::Loop(void* blank)
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
-    //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
+    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 18.0f);
     //IM_ASSERT(font != NULL);
 
     // Our state
@@ -282,13 +283,13 @@ void Helper::RenderStatic()
     for (int i = 0; i < g_VecTextData.size(); i++) 
     {
         Console::TextData* tx = g_VecTextData.at(i);
-        Render::EasyText(ImVec2(10, 60 + (i * 15)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
+        Render::EasyText(ImVec2(10, 70 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
     }
 }
 
 void Helper::RenderNotifications()
 {
-    ImVec2 pos = ImVec2(10, 40);
+    ImVec2 pos = ImVec2(10, 45);
     if (g_Vars->activated) 
     {
         Render::EasyText(ImVec2(pos.x, pos.y), ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f)), "Connected and activated");

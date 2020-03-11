@@ -10,6 +10,15 @@ CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.cc
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.h
 
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/driver.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/features/base.cc
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/features/base.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/globals.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/entity.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/sdk.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs/vector.h
+
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imconfig.h
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imgui.cc
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imgui.h
@@ -54,9 +63,11 @@ CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/imgui/imgui_impl_dx9.h
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/imgui/imgui_impl_win32.h
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/main.cc
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/overlay.h
+CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/utils.h
 
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/driver.h
+CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/features/base.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/globals.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/imgui/imconfig.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/imgui/imgui.h
@@ -64,4 +75,10 @@ CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/imgui/imgui_impl_dx9.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/imgui/imgui_impl_win32.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/overlay.cc
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/overlay.h
+
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/charfix.h
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/console.h
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/legacy.h
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/utils.cc
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/utils.h
 

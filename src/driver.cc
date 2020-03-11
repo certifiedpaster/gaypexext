@@ -26,8 +26,9 @@ Driver::DrvAllocFreeInfo Driver::UnsafeAlloc(ULONG RegSize)
 	return Addr;
 }
 
-void Driver::Init() 
+void Driver::Init(int pid) 
 {
+    _pid = pid;
     HANDLE drvhandle = CreateFileW(L"\\\\.\\GpuEnergyDrv", GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (drvhandle == INVALID_HANDLE_VALUE || !drvhandle) 
     {
@@ -35,7 +36,28 @@ void Driver::Init()
     } else 
     {
         _handle = drvhandle;
+        _init = true;
         Console::WriteLog("Handle: %p", _handle);
     }
 }
 
+/*
+template<typename T>
+T Driver::Read(uintptr_t address) 
+{
+    T val = T();    
+    if (!_init) 
+        return val;
+    
+    UnsafeRead(address, &val, sizeof(T));
+    return val;
+}
+
+template<typename T>
+void Driver::Write(uintptr_t address, T val) 
+{
+    if (!_init) 
+        return;
+    
+    UnsafeWrite(address, &val, sizeof(T));
+}*/
