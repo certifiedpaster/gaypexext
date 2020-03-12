@@ -46,6 +46,8 @@ uintptr_t Utils::GetBase(int pid, const char* modulename)
     for (int i = 0; i < MODULE_MAX; i++) 
     {
         ModuleDll mod = mi.list[i];
+        if (!mod.name) continue;
+        
         if (strstr(mod.name, modulename)) 
         {         
             return mod.baseaddress;

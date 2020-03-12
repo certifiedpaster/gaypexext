@@ -139,6 +139,14 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
 	}
 
 	PUNICODE_STRING unistr = (PUNICODE_STRING)buffer;
+    if (unistr->Length < 5 || unistr->Length > bufferSize) 
+    {
+        return 0;
+    }
+
+    printf("unistr: %u\n", unistr->Length);
+    printf("bufferSize: %i\n", bufferSize);
+
 	char* multi = (char*)malloc(unistr->Length);
 	// WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
 	WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);

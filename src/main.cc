@@ -31,7 +31,7 @@ void OfflineOffsets()
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
+{      
     g_Vars = (GlobalVars*)malloc(sizeof(GlobalVars));
     g_Vars->activated = false;
     g_Vars->shouldExit = false;
@@ -41,6 +41,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     {
         Console::WriteLog("Starting in debug mode...");
         OfflineOffsets();
+
+        Console::WriteLog("Allocating and connecting to system console...");
+        AllocConsole();
+        freopen_s((FILE**)stdin,  "CONIN$", "r",  stdin);
+        freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); 
         
         g_Vars->activated = true;
     } else 
@@ -58,6 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     Console::WriteLog("Game PID is %i", pid);
     uintptr_t baseaddr = Utils::GetBase(pid, "r5apex.exe");
     Console::WriteLog("Game base address is %llx", baseaddr);
+    g_Vars->apexBase = baseaddr;
     
     Console::WriteLog("Trying to connect to the driver...");
     g_Drv = new Driver();

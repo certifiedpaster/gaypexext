@@ -31,6 +31,10 @@ vector
 -
 string
 -
+thread
+-
+mutex
+-
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.cc
 windows.h
@@ -47,6 +51,8 @@ windows.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.cc
 ../globals.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
+../console.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
 base.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.h
 ../sdk/sdk.h

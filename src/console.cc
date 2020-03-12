@@ -25,12 +25,12 @@ std::string Console::GetTime()
 }
 
 void Console::Clean() 
-{
+{    
     g_VecTextData.clear();
 }
 
 void Console::WriteLog(const char* text, ...) 
-{
+{    
     char buffer[256];
 
     va_list argptr;

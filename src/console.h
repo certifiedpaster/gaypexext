@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <thread>
+#include <mutex>
 
 namespace Console 
 {

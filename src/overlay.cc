@@ -283,6 +283,7 @@ void Helper::RenderStatic()
     for (int i = 0; i < g_VecTextData.size(); i++) 
     {
         Console::TextData* tx = g_VecTextData.at(i);
+        if (tx == nullptr) break;
         Render::EasyText(ImVec2(10, 70 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
     }
 }
@@ -301,5 +302,5 @@ void Helper::RenderNotifications()
 
 void Helper::RenderFeatures()
 {
-
+    FeatureBase::Loop();
 }
