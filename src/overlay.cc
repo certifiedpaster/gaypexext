@@ -95,6 +95,9 @@ void Overlay::Loop(void* blank)
     ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 18.0f);
     //IM_ASSERT(font != NULL);
 
+    g_Vars->width = GetScreenInfo().width;
+    g_Vars->height = GetScreenInfo().height;
+
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
@@ -268,13 +271,18 @@ void Render::Text(ImVec2 pos, ImColor color, const char* text_begin, const char*
 		wrap_width, cpu_fine_clip_rect);
 }
 
+void Render::RectFilled(int x0, int y0, int x1, int y1, ImColor color, float rounding, int rounding_corners_flags) 
+{
+	ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(x0, y0), ImVec2(x1, y1), color, rounding, rounding_corners_flags);
+}
+
 void Render::EasyText(ImVec2 pos, ImColor color, const char* text) 
 {
     Render::Text(pos, color, text, text + strlen(text), 500, 0);
 }
 
 void Helper::RenderStatic() 
-{
+{   
     std::string toptext = "amlegit.com\n";
 	toptext += GetTime();
 	const char* text = toptext.c_str();
@@ -284,7 +292,7 @@ void Helper::RenderStatic()
     {
         Console::TextData* tx = g_VecTextData.at(i);
         if (tx == nullptr) break;
-        Render::EasyText(ImVec2(10, 70 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
+        Render::EasyText(ImVec2(10, 75 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
     }
 }
 

@@ -148,6 +148,7 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
     printf("bufferSize: %i\n", bufferSize);
 
 	char* multi = (char*)malloc(unistr->Length);
+    if (!multi) return 0;
 	// WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
 	WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);
 	free(buffer);

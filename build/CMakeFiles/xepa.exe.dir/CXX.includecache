@@ -57,6 +57,8 @@ base.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.h
 ../sdk/sdk.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/sdk.h
+../overlay.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.h
 
@@ -301,16 +303,28 @@ structs.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
 entity.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/entity.h
+w2s.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/w2s.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
 structs/vector.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/vector.h
+structs/matrix.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/matrix.h
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/matrix.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/vector.h
 math.h
 -
 stdlib.h
 -
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/w2s.h
+../globals.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
+structs.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.cc
 charfix.h

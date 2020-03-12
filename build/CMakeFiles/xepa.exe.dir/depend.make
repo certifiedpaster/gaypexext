@@ -15,10 +15,17 @@ CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/driver.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/features/base.cc
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/features/base.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/globals.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/imgui/imconfig.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/imgui/imgui.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/imgui/imgui_impl_dx9.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/imgui/imgui_impl_win32.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/overlay.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/entity.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/sdk.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs/matrix.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs/vector.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/w2s.h
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imconfig.h
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imgui.cc

@@ -16,10 +16,17 @@ CMakeFiles/xepa.exe.dir/src/features/base.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imconfig.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_impl_dx9.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_impl_win32.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/entity.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/sdk.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/matrix.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs/vector.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/w2s.h
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imconfig.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui.cc

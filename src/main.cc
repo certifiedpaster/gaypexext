@@ -18,7 +18,9 @@ void OfflineOffsets()
     g_Vars->offsets.entityList = 0x1883c38;
     g_Vars->offsets.punchAngle = 0x2308;
     g_Vars->offsets.viewMatrix = 0x1b3bd0;
+    g_Vars->offsets.viewRender = 0xcb011e0;
 
+    g_Vars->offsets.vecOrigin = 0x14c;
     g_Vars->offsets.absVelocity = 0x140;
     g_Vars->offsets.activeWeapon = 0x1944;
     g_Vars->offsets.boneClass = 0xee0;

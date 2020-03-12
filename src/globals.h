@@ -11,7 +11,9 @@ typedef struct _Offsets
     uintptr_t entityList;
     uintptr_t punchAngle;
     uintptr_t viewMatrix;
+    uintptr_t viewRender;
     
+    uintptr_t vecOrigin;
     uintptr_t absVelocity;
     uintptr_t activeWeapon;
     uintptr_t boneClass;
@@ -33,6 +35,8 @@ typedef struct _GlobalVars
     uintptr_t apexBase;
     Offsets offsets;
 
+    int width;
+    int height;
 } GlobalVars;
 
 extern GlobalVars* g_Vars;
