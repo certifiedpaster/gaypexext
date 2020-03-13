@@ -4,6 +4,10 @@
 #include "../sdk/sdk.h"
 #include "../overlay.h"
 
+#define GREEN ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f))
+#define RED ImColor(ImVec4(1.0f, 0.0f, 0.0f, 1.0f))
+#define BLUE ImColor(ImVec4(0.0f, 0.0f, 1.0f, 1.0f))
+
 void FeatureBase::Loop() 
 {
     if (!g_Vars->ready)
@@ -17,12 +21,34 @@ void FeatureBase::Loop()
         if (!player)
             continue;
 
-        Vector origin = player->Position();
-        Vector screen;
-        bool w2s = SDK::World2Screen(origin, screen);
-        if (w2s) 
+        // TODO: local-player check and entity type check
+
+        if (g_Vars->settings.visuals.enabled) 
         {
-            Render::EasyText(ImVec2(screen.x, screen.y), ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f)), "test");
+            Vector head;
+            Vector feet;
+            if (SDK::World2Screen(player->HitBoxPos(0), head) && SDK::World2Screen(player->Position(), feet)) 
+            {
+                float Height = (head.y - feet.y), Width = Height / 2.f;
+                if (g_Vars->settings.visuals.box) 
+                {       
+                    Render::DrawBox(RED, feet.x - (Width / 2.f), feet.y, Width, Height);
+                }
+                
+                int width = 2;
+                if (g_Vars->settings.visuals.health) 
+                {
+                    int health = player->Health();
+                    int px = 10;
+                    Render::Progress(feet.x + (Width / 2.f) - px, feet.y, width, Height, health);
+                }
+                if (g_Vars->settings.visuals.shield) 
+                {
+                    int shield = player->Shield();
+                    int px = 5;
+                    Render::Progress(feet.x - (Width / 2.f) + px, feet.y, width, Height, shield);
+                }
+            }
         }
     }
 }

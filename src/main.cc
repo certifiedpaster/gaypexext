@@ -19,6 +19,7 @@ void OfflineOffsets()
     g_Vars->offsets.punchAngle = 0x2308;
     g_Vars->offsets.viewMatrix = 0x1b3bd0;
     g_Vars->offsets.viewRender = 0xcb011e0;
+    g_Vars->offsets.studioHdr = 0x10e0;
 
     g_Vars->offsets.vecOrigin = 0x14c;
     g_Vars->offsets.absVelocity = 0x140;
@@ -29,7 +30,14 @@ void OfflineOffsets()
     g_Vars->offsets.lifeState = 0x730;
     g_Vars->offsets.teamNum = 0x3f0;
     g_Vars->offsets.health = 0x3e0;
+    g_Vars->offsets.shield = 0x170;
     g_Vars->offsets.flags = 0x98;   
+}
+
+void OfflineSettings() 
+{
+    g_Vars->settings.visuals.enabled = true;
+    g_Vars->settings.visuals.box = true;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -66,13 +74,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     uintptr_t baseaddr = Utils::GetBase(pid, "r5apex.exe");
     Console::WriteLog("Game base address is %llx", baseaddr);
     g_Vars->apexBase = baseaddr;
+
+    if (!pid || !baseaddr) 
+    {
+        g_Vars->shouldExit = true;
+        Console::WriteLog("Failed to get process information");
+    }
     
     Console::WriteLog("Trying to connect to the driver...");
     g_Drv = new Driver();
     g_Drv->Init(pid);   
 
     Console::WriteLog("Using offsets from %s", Utils::UnixDate(g_Vars->offsets.lastupdate).c_str());
-    g_Vars->ready = true;
+    
+    if (!g_Vars->shouldExit)
+        g_Vars->ready = true;
 
     while (!g_Vars->shouldExit) 
     {

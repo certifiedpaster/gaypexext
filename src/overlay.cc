@@ -276,9 +276,54 @@ void Render::RectFilled(int x0, int y0, int x1, int y1, ImColor color, float rou
 	ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(x0, y0), ImVec2(x1, y1), color, rounding, rounding_corners_flags);
 }
 
+void Render::Line(ImVec2 a, ImVec2 b, ImColor color, float thickness) 
+{
+	ImGui::GetWindowDrawList()->AddLine(a, b, color, thickness);
+}
+
 void Render::EasyText(ImVec2 pos, ImColor color, const char* text) 
 {
     Render::Text(pos, color, text, text + strlen(text), 500, 0);
+}
+
+void Render::DrawBox(ImColor color, int x, int y, int w, int h) 
+{
+	float thicc = 2.0f;
+
+	// ------
+	// |    |
+	Line(ImVec2(x, y), ImVec2(x + w, y), color, thicc);
+
+	// |
+	// |
+	// |
+	Line(ImVec2(x, y), ImVec2(x, y + h), color, thicc);
+
+	//      |
+	//      |
+	//      |
+	Line(ImVec2(x + w, y), ImVec2(x + w, y + h), color, thicc);
+
+	// |    |
+	// ------
+	Line(ImVec2(x, y + h), ImVec2(x + w, y + h), color, thicc);
+}
+
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+void Render::Progress(int x, int y, int w, int h, int phealth)
+{
+	int healthValue = max(0, min(phealth, 100));
+	float HealthPerc = healthValue / 100.f;
+
+	ImColor barColor = ImColor(
+		min(510 * (100 - healthValue) / 100, 255),
+		min(510 * healthValue / 100, 255),
+		25,
+		255
+	);
+
+	RectFilled(x, y, x + w, y + (int)(((float)h / 100.0f) * (float)phealth), barColor, 0.0f, 0);
 }
 
 void Helper::RenderStatic() 

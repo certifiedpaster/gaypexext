@@ -12,6 +12,7 @@ typedef struct _Offsets
     uintptr_t punchAngle;
     uintptr_t viewMatrix;
     uintptr_t viewRender;
+    uintptr_t studioHdr;
     
     uintptr_t vecOrigin;
     uintptr_t absVelocity;
@@ -22,8 +23,22 @@ typedef struct _Offsets
     uintptr_t lifeState;
     uintptr_t teamNum;
     uintptr_t health;
+    uintptr_t shield;
     uintptr_t flags;
 } Offsets;
+
+typedef struct _Visuals 
+{
+    bool enabled;
+    bool box;
+    bool health;
+    bool shield;
+} Visuals;
+
+typedef struct _Settings 
+{
+    Visuals visuals;
+} Settings;
 
 typedef struct _GlobalVars 
 {
@@ -37,6 +52,8 @@ typedef struct _GlobalVars
 
     int width;
     int height;
+
+    Settings settings;
 } GlobalVars;
 
 extern GlobalVars* g_Vars;

@@ -297,6 +297,8 @@ imgui/imgui_impl_win32.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/entity.h
 ../globals.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
+../sdk/structs.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/sdk.h
 structs.h
