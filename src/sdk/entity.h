@@ -4,6 +4,28 @@
 #include "../globals.h"
 #include "../sdk/structs.h"
 
+class EntityWeapon 
+{
+private:
+    uintptr_t _base;
+
+public:
+    EntityWeapon(uintptr_t base)
+    {
+        _base = base;
+    }
+    
+    float BulletSpeed() 
+    {
+        return g_Drv->Read<float>(_base + g_Vars->offsets.bulletSpeed);
+    }
+
+    float BulletGravity() 
+    {
+        return g_Drv->Read<float>(_base + g_Vars->offsets.bulletGravity);
+    }
+};
+
 class EntityPlayer 
 {
 private:
@@ -79,6 +101,31 @@ public:
     Vector Viewangles() 
     {
         return g_Drv->Read<Vector>(_base + g_Vars->offsets.viewAngles);
+    }
+
+    void WriteViewangles(Vector angle) 
+    {
+        g_Drv->Write<Vector>(_base + g_Vars->offsets.viewAngles, angle);
+    }
+
+    EntityWeapon* ActiveWeapon() 
+    {
+        DWORD64 ActWeaponId = g_Drv->Read<DWORD64>(_base + g_Vars->offsets.activeWeapon) & 0xFFFF;
+		if (ActWeaponId) 
+        {
+            uintptr_t pweapon = g_Drv->Read<uintptr_t>(g_Vars->apexBase + g_Vars->offsets.entityList + (ActWeaponId << 5));
+            EntityWeapon* ewpn = new EntityWeapon(pweapon);
+            return ewpn;
+        }
+        else 
+        {
+            return nullptr;
+        }
+    }
+
+    Vector Velocity() 
+    {
+        return g_Drv->Read<Vector>(_base + g_Vars->offsets.absVelocity);
     }
 };
 

@@ -44,6 +44,18 @@ namespace SDK
 
         return (float)(sqrt(pow(delta.x, 2.0f) + pow(delta.y, 2.0f)));
     }
+
+    float FastSQRT(float x) 
+    {
+		union { int i; float x; } u;
+		u.x = x; u.i = (u.i >> 1) + 0x1FC00000;
+		u.x = u.x + x / u.x; return .25f * u.x + x / u.x;
+	}
+
+    float Dist3D(const Vector& Src, const Vector& Dst) 
+    {
+		return FastSQRT(powf(Src.x - Dst.x, 2.f) + powf(Src.y - Dst.y, 2.f) + powf(Src.z - Dst.z, 2.f));
+	}
 }
 
 #endif

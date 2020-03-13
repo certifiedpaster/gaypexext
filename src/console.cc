@@ -8,6 +8,7 @@
 #include "console.h"
 
 std::vector<Console::TextData*> g_VecTextData;
+bool g_ShowConsole;
 
 std::string Console::GetTime() 
 {
@@ -31,6 +32,8 @@ void Console::Clean()
 
 void Console::WriteLog(const char* text, ...) 
 {    
+    g_ShowConsole = true;
+    
     char buffer[256];
 
     va_list argptr;
@@ -44,4 +47,17 @@ void Console::WriteLog(const char* text, ...)
     memcpy(tx->text, output.c_str(), 255);
 
     g_VecTextData.push_back(tx);
+}
+
+void Console::DisplayLoop(void* blank) 
+{
+    while (!g_Vars->shouldExit) 
+    {
+        Sleep(3000);
+        if (g_ShowConsole) 
+        {
+            Sleep(3000);
+            g_ShowConsole = false;
+        }
+    }
 }

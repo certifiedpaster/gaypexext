@@ -33,7 +33,10 @@ void OfflineOffsets()
     g_Vars->offsets.teamNum = 0x3f0;
     g_Vars->offsets.health = 0x3e0;
     g_Vars->offsets.shield = 0x170;
-    g_Vars->offsets.flags = 0x98;   
+    g_Vars->offsets.flags = 0x98;
+
+    g_Vars->offsets.bulletSpeed = 0x1d2c;
+    g_Vars->offsets.bulletGravity = 0x1d34;
 }
 
 void OfflineSettings() 
@@ -44,7 +47,15 @@ void OfflineSettings()
     g_Vars->settings.visuals.box = true;
     
     g_Vars->settings.aim.enabled = true;
+    g_Vars->settings.aim.aimkey = VK_XBUTTON1;
     g_Vars->settings.aim.maxfov = 10.0f;
+    g_Vars->settings.aim.nopunch = true;
+    
+    g_Vars->settings.aim.smooth = true;
+    g_Vars->settings.aim.divider = 200;
+    
+    g_Vars->settings.aim.gravity = true;
+    g_Vars->settings.aim.velocity = true;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -58,6 +69,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     {
         Console::WriteLog("Starting in debug mode...");
         OfflineOffsets();
+        OfflineSettings();
 
         Console::WriteLog("Allocating and connecting to system console...");
         AllocConsole();
@@ -74,6 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     Console::WriteLog("Creating threads...");
     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Overlay::Loop, nullptr, 0, nullptr);
+    CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Console::DisplayLoop, nullptr, 0, nullptr);
 
     Console::WriteLog("Getting program info...");
     int pid = Utils::FindProcess(L"r5apex.exe");

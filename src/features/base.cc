@@ -23,7 +23,7 @@ void FeatureBase::Loop()
 
     uintptr_t aimtarget = 0;    
     float maxfov = 999.9f;  
-    for (int i = 0; i < 80; i++) 
+    for (int i = 0; i < 100; i++) 
     {
         uintptr_t current = g_Drv->Read<uintptr_t>(g_Vars->apexBase + g_Vars->offsets.entityList + (i << 5));
         EntityPlayer* player = new EntityPlayer(current);
@@ -34,7 +34,7 @@ void FeatureBase::Loop()
         // TODO: local-player check and entity type check
 
         if (plocalplayer == current)
-            return;
+            continue;
 
         if (g_Vars->settings.visuals.enabled) 
         {
@@ -79,6 +79,66 @@ void FeatureBase::Loop()
 
     if (g_Vars->settings.aim.enabled) 
     {
-        
+        if (aimtarget) 
+        {
+            if(GetKeyState(g_Vars->settings.aim.aimkey) & 0x8000) 
+            {
+                EntityPlayer* player = new EntityPlayer(aimtarget);
+                Vector target = player->HitBoxPos(0);
+
+                if (g_Vars->settings.aim.gravity || g_Vars->settings.aim.velocity) 
+                {
+                    EntityWeapon* active = localplayer->ActiveWeapon();
+                    if (active) 
+                    {
+                        float BulletSpeed = active->BulletSpeed();
+                        float BulletGrav = active->BulletGravity();
+                        printf("%f %f\n", BulletSpeed, BulletGrav);
+
+                        if (BulletSpeed > 1.f) 
+                        {
+                            Vector muzzle = localplayer->HitBoxPos(0); // TODO: use actual muzzle pos
+                            if (g_Vars->settings.aim.gravity) 
+                            {
+                                float VerticalTime = SDK::Dist3D(target, muzzle) / BulletSpeed;
+                                target.z += (750.f * BulletGrav * 0.5f) * (VerticalTime * VerticalTime);
+                            }
+                            if (g_Vars->settings.aim.velocity) 
+                            {
+                                float HorizontalTime = SDK::Dist3D(target, muzzle) / BulletSpeed;
+                                target += (player->Velocity() * HorizontalTime);
+                            } 
+                        }     
+                    }  
+                }
+
+                Vector calcangle = SDK::CalculateAngle(camera, target);
+                Vector Delta = calcangle - viewangles;
+                
+                if (g_Vars->settings.aim.smooth && abs(Delta.x) > 0.009 && abs(Delta.y) > 0.009)
+                {
+                    Delta = Delta / ((float)g_Vars->settings.aim.divider / 100);
+                }
+
+                Vector SmoothedAngles = viewangles + Delta;
+
+                if (g_Vars->settings.aim.nopunch) 
+                {
+                    Vector RecoilVec = g_Drv->Read<Vector>(plocalplayer + g_Vars->offsets.punchAngle);
+                            
+                    if (RecoilVec.x != 0 || RecoilVec.y != 0)
+                    {
+                        if (g_Vars->settings.aim.smooth)
+                        {
+                            RecoilVec = RecoilVec / ((float)g_Vars->settings.aim.divider / 100);
+                        }
+                        SmoothedAngles -= RecoilVec;
+                    }
+                }
+
+                SmoothedAngles = SDK::NormalizeAngles(SmoothedAngles);
+                localplayer->WriteViewangles(SmoothedAngles);
+            }                    
+        }            
     }
 }

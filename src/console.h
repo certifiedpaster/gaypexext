@@ -16,9 +16,11 @@ namespace Console
     std::string GetTime();
     void WriteLog(const char* text, ...);
     void Clean();
+    void DisplayLoop(void* blank);
 };
 
 extern std::vector<Console::TextData*> g_VecTextData;
+extern bool g_ShowConsole;
 
 #endif
 

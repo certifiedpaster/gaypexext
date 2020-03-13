@@ -27,6 +27,9 @@ typedef struct _Offsets
     uintptr_t health;
     uintptr_t shield;
     uintptr_t flags;
+
+    uintptr_t bulletSpeed;
+    uintptr_t bulletGravity;
 } Offsets;
 
 typedef struct _Visuals 
@@ -41,6 +44,14 @@ typedef struct _Aim
 {
     bool enabled;
     float maxfov;
+    bool nopunch;
+    int aimkey;
+
+    bool smooth;
+    int divider;
+
+    bool velocity;
+    bool gravity;
 } Aim;
 
 typedef struct _Settings 

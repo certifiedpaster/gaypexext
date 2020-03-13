@@ -333,12 +333,15 @@ void Helper::RenderStatic()
 	const char* text = toptext.c_str();
     Render::EasyText(ImVec2(10, 10), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), text);
 
-    for (int i = 0; i < g_VecTextData.size(); i++) 
+    if (g_ShowConsole) 
     {
-        Console::TextData* tx = g_VecTextData.at(i);
-        if (tx == nullptr) break;
-        Render::EasyText(ImVec2(10, 75 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
-    }
+        for (int i = 0; i < g_VecTextData.size(); i++) 
+        {
+            Console::TextData* tx = g_VecTextData.at(i);
+            if (tx == nullptr) break;
+            Render::EasyText(ImVec2(10, 75 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
+        }
+    }     
 }
 
 void Helper::RenderNotifications()
