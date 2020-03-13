@@ -93,7 +93,6 @@ void FeatureBase::Loop()
                     {
                         float BulletSpeed = active->BulletSpeed();
                         float BulletGrav = active->BulletGravity();
-                        printf("%f %f\n", BulletSpeed, BulletGrav);
 
                         if (BulletSpeed > 1.f) 
                         {

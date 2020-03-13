@@ -26,6 +26,7 @@ void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 MARGINS gMargin = {0, 0, 600, 600};
+MARGINS zero = {-1, -1, -1, -1};
 
 typedef struct _ScreenInfo {
     int width;
@@ -41,14 +42,14 @@ ScreenInfo GetScreenInfo()
 }
 
 void Overlay::Loop(void* blank) 
-{      
+{
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("b"), NULL };
     ::RegisterClassEx(&wc);
     HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("a"), WS_EX_TOPMOST | WS_POPUP, 0, 0, GetScreenInfo().width, GetScreenInfo().height, NULL, NULL, wc.hInstance, NULL);
 
-    SetWindowLong(hwnd, GWL_EXSTYLE,(int)GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED |WS_EX_TRANSPARENT);
-    SetLayeredWindowAttributes(hwnd, RGB(0,0,0), 0, ULW_COLORKEY);
-    //SetLayeredWindowAttributes(hwnd, 0, 255, LWA_ALPHA);
+    SetWindowLong(hwnd, GWL_EXSTYLE,(int)GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+    //SetLayeredWindowAttributes(hwnd, RGB(0,0,0), 0, ULW_COLORKEY);
+    SetLayeredWindowAttributes(hwnd, 0, 255, LWA_ALPHA);
 
     gMargin = {0, 0, GetScreenInfo().width, GetScreenInfo().height};
 
@@ -101,7 +102,7 @@ void Overlay::Loop(void* blank)
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
-    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
+    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 0.00f);
 
     // Main loop
     MSG msg;
@@ -177,6 +178,7 @@ bool CreateDeviceD3D(HWND hWnd)
     g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
     //g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;           // Present with vsync
     g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;   // Present without vsync, maximum unthrottled framerate
+    g_d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
     if (g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3dpp, &g_pd3dDevice) < 0)
         return false;
 
@@ -210,7 +212,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch (msg)
     {
     case WM_PAINT:
-        DwmExtendFrameIntoClientArea(hWnd, &gMargin);  
+        DwmExtendFrameIntoClientArea(hWnd, &zero);  
         break;
     case WM_SIZE:
         if (g_pd3dDevice != NULL && wParam != SIZE_MINIMIZED)
