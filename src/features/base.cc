@@ -3,6 +3,7 @@
 #include "base.h"
 #include "../sdk/sdk.h"
 #include "../overlay.h"
+#include "../utils.h"
 
 #define GREEN ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f))
 #define RED ImColor(ImVec4(1.0f, 0.0f, 0.0f, 1.0f))
@@ -10,9 +11,18 @@
 
 void FeatureBase::Loop() 
 {
+    Utils::LimitFPS(g_Vars->settings.maxfps);
+    
     if (!g_Vars->ready)
         return;
     
+    uintptr_t plocalplayer = g_Drv->Read<uintptr_t>(g_Vars->apexBase + g_Vars->offsets.localPlayer);
+    EntityPlayer* localplayer = new EntityPlayer(plocalplayer);
+    Vector camera = localplayer->Camera();
+    Vector viewangles = localplayer->Viewangles();
+
+    uintptr_t aimtarget = 0;    
+    float maxfov = 999.9f;  
     for (int i = 0; i < 80; i++) 
     {
         uintptr_t current = g_Drv->Read<uintptr_t>(g_Vars->apexBase + g_Vars->offsets.entityList + (i << 5));
@@ -22,6 +32,9 @@ void FeatureBase::Loop()
             continue;
 
         // TODO: local-player check and entity type check
+
+        if (plocalplayer == current)
+            return;
 
         if (g_Vars->settings.visuals.enabled) 
         {
@@ -50,5 +63,22 @@ void FeatureBase::Loop()
                 }
             }
         }
+
+        if (g_Vars->settings.aim.enabled) 
+        {
+            Vector calcangle = SDK::CalculateAngle(camera, player->HitBoxPos(0));
+            float fov = SDK::GetFOV(calcangle, viewangles);
+
+            if (fov < maxfov && fov < g_Vars->settings.aim.maxfov) 
+            {
+                maxfov = fov;
+                aimtarget = current;
+            }
+        }
+    }
+
+    if (g_Vars->settings.aim.enabled) 
+    {
+        
     }
 }

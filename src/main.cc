@@ -21,6 +21,8 @@ void OfflineOffsets()
     g_Vars->offsets.viewRender = 0xcb011e0;
     g_Vars->offsets.studioHdr = 0x10e0;
 
+    g_Vars->offsets.viewAngles = 0x23d0;
+    g_Vars->offsets.cameraPos = 0x1da8;
     g_Vars->offsets.vecOrigin = 0x14c;
     g_Vars->offsets.absVelocity = 0x140;
     g_Vars->offsets.activeWeapon = 0x1944;
@@ -36,8 +38,13 @@ void OfflineOffsets()
 
 void OfflineSettings() 
 {
+    g_Vars->settings.maxfps = 60;
+    
     g_Vars->settings.visuals.enabled = true;
     g_Vars->settings.visuals.box = true;
+    
+    g_Vars->settings.aim.enabled = true;
+    g_Vars->settings.aim.maxfov = 10.0f;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

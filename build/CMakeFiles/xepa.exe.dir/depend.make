@@ -26,6 +26,7 @@ CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs/matrix.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/structs/vector.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/sdk/w2s.h
+CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/utils.h
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imconfig.h
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imgui.cc

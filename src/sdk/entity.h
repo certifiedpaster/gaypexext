@@ -70,6 +70,16 @@ public:
 		
 		return Position() + BoneOff;
 	}
+
+    Vector Camera() 
+    {
+        return g_Drv->Read<Vector>(_base + g_Vars->offsets.cameraPos);
+    }
+
+    Vector Viewangles() 
+    {
+        return g_Drv->Read<Vector>(_base + g_Vars->offsets.viewAngles);
+    }
 };
 
 #endif

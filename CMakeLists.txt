@@ -20,4 +20,4 @@ link_directories("/mnt/c/Program Files (x86)/Microsoft DirectX SDK (June 2010)/L
 
 # Build main executable
 add_executable(xepa.exe ${sourcefiles})
-target_link_libraries(xepa.exe d3d9 dwmapi ntdll)
+target_link_libraries(xepa.exe d3d9 dwmapi ntdll winmm)

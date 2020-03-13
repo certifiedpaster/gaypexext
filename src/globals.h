@@ -14,6 +14,8 @@ typedef struct _Offsets
     uintptr_t viewRender;
     uintptr_t studioHdr;
     
+    uintptr_t viewAngles;
+    uintptr_t cameraPos;
     uintptr_t vecOrigin;
     uintptr_t absVelocity;
     uintptr_t activeWeapon;
@@ -35,9 +37,17 @@ typedef struct _Visuals
     bool shield;
 } Visuals;
 
+typedef struct _Aim 
+{
+    bool enabled;
+    float maxfov;
+} Aim;
+
 typedef struct _Settings 
 {
     Visuals visuals;
+    Aim aim;
+    int maxfps;
 } Settings;
 
 typedef struct _GlobalVars 

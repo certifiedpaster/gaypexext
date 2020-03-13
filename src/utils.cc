@@ -55,3 +55,14 @@ uintptr_t Utils::GetBase(int pid, const char* modulename)
     }
     return 0;
 }
+
+static DWORD LastFrameTime = 0;
+void Utils::LimitFPS(int targetfps) 
+{
+    DWORD currentTime = timeGetTime();
+    if ( (currentTime - LastFrameTime) < (1000 / targetfps))
+    {
+        Sleep(currentTime - LastFrameTime);
+    }
+    LastFrameTime = currentTime;   
+}
