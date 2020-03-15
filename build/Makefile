@@ -123,6 +123,33 @@ xepa.exe/fast:
 	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/build
 .PHONY : xepa.exe/fast
 
+src/activation/activation.o: src/activation/activation.cc.o
+
+.PHONY : src/activation/activation.o
+
+# target to build an object file
+src/activation/activation.cc.o:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o
+.PHONY : src/activation/activation.cc.o
+
+src/activation/activation.i: src/activation/activation.cc.i
+
+.PHONY : src/activation/activation.i
+
+# target to preprocess a source file
+src/activation/activation.cc.i:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/activation/activation.cc.i
+.PHONY : src/activation/activation.cc.i
+
+src/activation/activation.s: src/activation/activation.cc.s
+
+.PHONY : src/activation/activation.s
+
+# target to generate assembly for a file
+src/activation/activation.cc.s:
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/activation/activation.cc.s
+.PHONY : src/activation/activation.cc.s
+
 src/console.o: src/console.cc.o
 
 .PHONY : src/console.o
@@ -456,6 +483,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... xepa.exe"
 	@echo "... edit_cache"
+	@echo "... src/activation/activation.o"
+	@echo "... src/activation/activation.i"
+	@echo "... src/activation/activation.s"
 	@echo "... src/console.o"
 	@echo "... src/console.i"
 	@echo "... src/console.s"

@@ -8,6 +8,7 @@ namespace Utils
     int FindProcess(const wchar_t* proc);
     uintptr_t GetBase(int pid, const char* modulename);
     void LimitFPS(int targetfps);
+    void RandomText(char *s, const int len);
 }
 
 #endif

@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc
+windows.h
+-
+winsock2.h
+-
+ws2tcpip.h
+-
+stdlib.h
+-
+stdio.h
+-
+activation.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
+
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/charfix.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.cc
@@ -259,6 +275,8 @@ console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
 utils.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+activation/activation.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.cc
 globals.h
@@ -287,6 +305,10 @@ ctime
 -
 string
 -
+style.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/style.h
+utils.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
 imgui/imgui.h
@@ -329,6 +351,8 @@ stdlib.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
 structs.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/sdk/structs.h
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/style.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.cc
 charfix.h

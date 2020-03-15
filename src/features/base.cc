@@ -10,9 +10,7 @@
 #define BLUE ImColor(ImVec4(0.0f, 0.0f, 1.0f, 1.0f))
 
 void FeatureBase::Loop() 
-{
-    Utils::LimitFPS(g_Vars->settings.maxfps);
-    
+{  
     if (!g_Vars->ready)
         return;
     
@@ -135,7 +133,7 @@ void FeatureBase::Loop()
                     }
                 }
 
-                SmoothedAngles = SDK::NormalizeAngles(SmoothedAngles);
+                SmoothedAngles = SDK::ClampAngles(SmoothedAngles);
                 localplayer->WriteViewangles(SmoothedAngles);
             }                    
         }            

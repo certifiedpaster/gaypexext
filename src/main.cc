@@ -5,6 +5,7 @@
 #include "overlay.h"
 #include "console.h"
 #include "utils.h"
+#include "activation/activation.h"
 
 GlobalVars* g_Vars;
 Driver* g_Drv;
@@ -45,6 +46,8 @@ void OfflineSettings()
     
     g_Vars->settings.visuals.enabled = true;
     g_Vars->settings.visuals.box = true;
+    g_Vars->settings.visuals.health = true;
+    g_Vars->settings.visuals.shield = true;
     
     g_Vars->settings.aim.enabled = true;
     g_Vars->settings.aim.aimkey = VK_XBUTTON1;
@@ -81,7 +84,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     {
         // TODO: server connection socket.io
         // load offsets from server
-        
     }
     
     Console::WriteLog("Creating threads...");
@@ -107,6 +109,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     Console::WriteLog("Using offsets from %s", Utils::UnixDate(g_Vars->offsets.lastupdate).c_str());
     
+    while (!g_Vars->activated) 
+    {
+        Sleep(1000);
+    }
+
     if (!g_Vars->shouldExit)
         g_Vars->ready = true;
 

@@ -27,7 +27,7 @@ namespace Render
 namespace Helper 
 {
     void RenderStatic();
-    void RenderNotifications();
+    void RenderMenu();
     void RenderFeatures();
 }
 

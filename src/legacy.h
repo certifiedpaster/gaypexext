@@ -139,7 +139,7 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
 	}
 
 	PUNICODE_STRING unistr = (PUNICODE_STRING)buffer;
-    if (unistr->Length < 5 || unistr->Length > bufferSize) 
+    if (unistr->Length < 5 || unistr->Length >= bufferSize) 
     {
         return 0;
     }

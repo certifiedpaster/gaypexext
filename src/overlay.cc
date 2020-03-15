@@ -15,6 +15,8 @@
 #include <dwmapi.h>
 #include <ctime>
 #include <string>
+#include "style.h"
+#include "utils.h"
 
 static LPDIRECT3D9              g_pD3D = NULL;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = NULL;
@@ -24,6 +26,7 @@ bool CreateDeviceD3D(HWND hWnd);
 void CleanupDeviceD3D();
 void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+HWND hwnd;
 
 MARGINS gMargin = {0, 0, 600, 600};
 MARGINS zero = {-1, -1, -1, -1};
@@ -41,13 +44,27 @@ ScreenInfo GetScreenInfo()
     return sci;
 }
 
+void ClickThough(bool click) 
+{
+    if (click) 
+    {
+        SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT);
+    } else 
+    {
+        SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_LAYERED);
+    }
+}
+
+static bool ShowMenu = false;
+static int LastTick = 0;
 void Overlay::Loop(void* blank) 
 {
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("b"), NULL };
     ::RegisterClassEx(&wc);
-    HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("a"), WS_EX_TOPMOST | WS_POPUP, 0, 0, GetScreenInfo().width, GetScreenInfo().height, NULL, NULL, wc.hInstance, NULL);
+    hwnd = ::CreateWindow(wc.lpszClassName, _T("a"), WS_EX_TOPMOST | WS_POPUP, 0, 0, GetScreenInfo().width, GetScreenInfo().height, NULL, NULL, wc.hInstance, NULL);
 
-    SetWindowLong(hwnd, GWL_EXSTYLE,(int)GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+    //SetWindowLong(hwnd, GWL_EXSTYLE,(int)GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+    ClickThough(true);
     //SetLayeredWindowAttributes(hwnd, RGB(0,0,0), 0, ULW_COLORKEY);
     SetLayeredWindowAttributes(hwnd, 0, 255, LWA_ALPHA);
 
@@ -75,6 +92,7 @@ void Overlay::Loop(void* blank)
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
+    SetStyle();
     //ImGui::StyleColorsClassic();
 
     // Setup Platform/Renderer bindings
@@ -127,11 +145,32 @@ void Overlay::Loop(void* blank)
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        Render::Start();
-        Helper::RenderStatic();
-        Helper::RenderNotifications();
-        Helper::RenderFeatures();
-        Render::End();
+        Utils::LimitFPS(g_Vars->settings.maxfps);
+        if(GetKeyState(VK_INSERT) & 0x8000) 
+        {
+            if ((GetTickCount() - LastTick) > 1000) 
+            {
+                ShowMenu = !ShowMenu;
+                LastTick = GetTickCount();
+            }   
+        }
+
+        if (ShowMenu) 
+        {
+            SetStyle();
+            Helper::RenderMenu();
+            ClickThough(false);
+        } else 
+        {
+            ImVec4* colors = ImGui::GetStyle().Colors;
+            colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+            colors[ImGuiCol_Border] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+            Render::Start();
+            Helper::RenderStatic();
+            Helper::RenderFeatures();
+            Render::End();
+            ClickThough(true);
+        }
 
         // Rendering
         ImGui::EndFrame();
@@ -257,8 +296,8 @@ void Render::Start()
 		ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
 		ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoInputs);
 
-    ImVec4* colors = ImGui::GetStyle().Colors;
-	colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+    //ImVec4* colors = ImGui::GetStyle().Colors;
+	//colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 }
 
 void Render::End() 
@@ -329,7 +368,7 @@ void Render::Progress(int x, int y, int w, int h, int phealth)
 }
 
 void Helper::RenderStatic() 
-{   
+{      
     std::string toptext = "amlegit.com\n";
 	toptext += GetTime();
 	const char* text = toptext.c_str();
@@ -341,21 +380,16 @@ void Helper::RenderStatic()
         {
             Console::TextData* tx = g_VecTextData.at(i);
             if (tx == nullptr) break;
-            Render::EasyText(ImVec2(10, 75 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
+            Render::EasyText(ImVec2(500, 10 + (i * 20)), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), tx->text);
         }
     }     
 }
 
-void Helper::RenderNotifications()
+void Helper::RenderMenu()
 {
-    ImVec2 pos = ImVec2(10, 45);
-    if (g_Vars->activated) 
-    {
-        Render::EasyText(ImVec2(pos.x, pos.y), ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f)), "Connected and activated");
-    } else 
-    {
-        Render::EasyText(ImVec2(pos.x, pos.y), ImColor(ImVec4(1.0f, 0.0f, 0.0f, 1.0f)), "Not connected to server");
-    }
+    ImGui::Begin("amlegit.com");
+    ImGui::Text("This is some useful text.");
+    ImGui::End();
 }
 
 void Helper::RenderFeatures()
