@@ -5,19 +5,23 @@
 #include "entity.h"
 #include "w2s.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846f
+#endif
+#ifndef M_RADPI
+#define M_RADPI	57.295779513082f
+#endif
+
 namespace SDK 
 {
-    Vector CalculateAngle(Vector src, Vector dst) 
+    Vector CalculateAngle(Vector Src, Vector Dst) 
     {
-        Vector angle;
-        Vector delta = src - dst;
-
-        double hYp = sqrtf((double)(delta.x * delta.x) + (delta.y * delta.y));
-        angle.x = (float)(atan(delta.z / hYp) * 57.295779513082f);
-        angle.y = (float)(atan(delta.y / delta.x) * 57.295779513082f);
-        if (delta.x >= 0.0) angle.y += 180.0f;
-
-        return angle;
+        Vector Delta = Src - Dst, AimAngles;
+		float Hyp = sqrtf(powf(Delta.x, 2.f) + powf(Delta.y, 2.f));
+		AimAngles.y = atanf(Delta.y / Delta.x) * M_RADPI;
+		AimAngles.x = atanf(Delta.z / Hyp) * M_RADPI;
+		if (Delta.x >= 0.f) AimAngles.y += 180.f;
+		AimAngles.z = 0.f; return AimAngles;
     }
 
     float Vec3Length(Vector& Src) 

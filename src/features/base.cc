@@ -112,7 +112,7 @@ void FeatureBase::Loop()
                 Vector calcangle = SDK::CalculateAngle(camera, target);
                 Vector Delta = calcangle - viewangles;
                 
-                if (g_Vars->settings.aim.smooth && abs(Delta.x) > 0.009 && abs(Delta.y) > 0.009)
+                if (g_Vars->settings.aim.smooth && abs(Delta.x) > 0.009f && abs(Delta.y) > 0.009f)
                 {
                     Delta = Delta / ((float)g_Vars->settings.aim.divider / 100);
                 }
@@ -134,6 +134,9 @@ void FeatureBase::Loop()
                 }
 
                 SmoothedAngles = SDK::ClampAngles(SmoothedAngles);
+
+                printf("delta: %f %f %f\n", Delta.x, Delta.y, Delta.z);
+                printf("final: %f %f %f\n", SmoothedAngles.x, SmoothedAngles.y, SmoothedAngles.z);
                 localplayer->WriteViewangles(SmoothedAngles);
             }                    
         }            
