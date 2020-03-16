@@ -49,17 +49,23 @@ void OfflineSettings()
     g_Vars->settings.visuals.box = true;
     g_Vars->settings.visuals.health = true;
     g_Vars->settings.visuals.shield = true;
+    g_Vars->settings.visuals.showTarget = true;
+    g_Vars->settings.visuals.fovCircle = false;
     
     g_Vars->settings.aim.enabled = true;
     g_Vars->settings.aim.aimkey = VK_XBUTTON2;
     g_Vars->settings.aim.maxfov = 10.0f;
     g_Vars->settings.aim.nopunch = true;
+    g_Vars->settings.aim.maxdistance = 5000;
     
     g_Vars->settings.aim.smooth = true;
     g_Vars->settings.aim.divider = 200;
     
     g_Vars->settings.aim.gravity = true;
     g_Vars->settings.aim.velocity = true;
+    
+    g_Vars->settings.aim.teamCheck = true;
+    g_Vars->settings.aim.knockCheck = true;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

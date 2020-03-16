@@ -351,6 +351,11 @@ void Render::DrawBox(ImColor color, int x, int y, int w, int h)
 	Line(ImVec2(x, y + h), ImVec2(x + w, y + h), color, thicc);
 }
 
+void Render::Circle(ImVec2 point, ImColor color, float radius, int num_segments, float thickness) 
+{
+	ImGui::GetWindowDrawList()->AddCircle(point, radius, color, num_segments, thickness);
+}
+
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 void Render::Progress(int x, int y, int w, int h, int phealth)
@@ -407,6 +412,7 @@ void Helper::RenderMenu()
             ImGui::SliderInt("Max FOV", &maxfov, 1, 180);
             g_Vars->settings.aim.maxfov = (float)maxfov;
             ImGui::Checkbox("No recoil", &g_Vars->settings.aim.nopunch);
+            ImGui::SliderInt("Max distance", &g_Vars->settings.aim.maxdistance, 50, 20000);
             
             std::stringstream stream;
             stream << std::hex << g_Vars->settings.aim.aimkey;
@@ -418,6 +424,9 @@ void Helper::RenderMenu()
 
             ImGui::Checkbox("Predict gravity", &g_Vars->settings.aim.gravity);
             ImGui::Checkbox("Predict velocity", &g_Vars->settings.aim.velocity);
+            
+            ImGui::Checkbox("Team check", &g_Vars->settings.aim.teamCheck);
+            ImGui::Checkbox("Knock check", &g_Vars->settings.aim.knockCheck);
         }
         if (ImGui::CollapsingHeader("Visuals")) 
         {
@@ -425,6 +434,8 @@ void Helper::RenderMenu()
             ImGui::Checkbox("Box", &g_Vars->settings.visuals.box);
             ImGui::Checkbox("Health", &g_Vars->settings.visuals.health);
             ImGui::Checkbox("Shield", &g_Vars->settings.visuals.shield);
+            ImGui::Checkbox("Hightlight target", &g_Vars->settings.visuals.showTarget);
+            ImGui::Checkbox("FOV circle", &g_Vars->settings.visuals.fovCircle);
         }
         if (ImGui::CollapsingHeader("About"))
         {

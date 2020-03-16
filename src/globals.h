@@ -38,6 +38,8 @@ typedef struct _Visuals
     bool box;
     bool health;
     bool shield;
+    bool showTarget;
+    bool fovCircle;
 } Visuals;
 
 typedef struct _Aim 
@@ -46,12 +48,16 @@ typedef struct _Aim
     float maxfov;
     bool nopunch;
     int aimkey;
+    int maxdistance;
 
     bool smooth;
     int divider;
 
     bool velocity;
     bool gravity;
+
+    bool teamCheck;
+    bool knockCheck;
 } Aim;
 
 typedef struct _Settings 

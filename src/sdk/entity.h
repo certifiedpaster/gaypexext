@@ -127,6 +127,16 @@ public:
     {
         return g_Drv->Read<Vector>(_base + g_Vars->offsets.absVelocity);
     }
+
+    int Team() 
+    {
+        return g_Drv->Read<int>(_base + g_Vars->offsets.teamNum);
+    }
+
+    bool Knocked() 
+    {
+        return (g_Drv->Read<int>(_base + g_Vars->offsets.bleedout) != 0);
+    }
 };
 
 #endif

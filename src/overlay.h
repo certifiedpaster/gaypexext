@@ -22,6 +22,7 @@ namespace Render
     void Line(ImVec2 a, ImVec2 b, ImColor color, float thickness);
     void DrawBox(ImColor color, int x, int y, int w, int h);
     void Progress(int x, int y, int w, int h, int phealth);
+    void Circle(ImVec2 point, ImColor color, float radius, int num_segments, float thickness);
 }
 
 namespace Helper 

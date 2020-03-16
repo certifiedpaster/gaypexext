@@ -273,6 +273,11 @@ ModuleInfo GetProcessModules(int pid)
 				mi.list[total].name = filename;
 				mi.list[total].baseaddress = (uintptr_t)allocationBase;
 				total++;
+                if (strstr(filename, "r5apex.exe")) 
+                {
+                    CloseHandle(proc);
+	                return mi;
+                }
 				if (total >= MODULE_MAX) 
 				{
 					CloseHandle(proc);

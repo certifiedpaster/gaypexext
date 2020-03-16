@@ -8,7 +8,10 @@
 #define GREEN ImColor(ImVec4(0.0f, 1.0f, 0.0f, 1.0f))
 #define RED ImColor(ImVec4(1.0f, 0.0f, 0.0f, 1.0f))
 #define BLUE ImColor(ImVec4(0.0f, 0.0f, 1.0f, 1.0f))
+#define YELLOW ImColor(ImVec4(1.0f, 1.0f, 0.0f, 1.0f))
 
+uintptr_t lasttarget = 0;
+bool locktarget = false;
 void FeatureBase::Loop() 
 {  
     if (!g_Vars->ready)
@@ -18,6 +21,7 @@ void FeatureBase::Loop()
     EntityPlayer* localplayer = new EntityPlayer(plocalplayer);
     Vector camera = localplayer->Camera();
     Vector viewangles = localplayer->Viewangles();
+    int localteam = localplayer->Team();
 
     uintptr_t aimtarget = 0;    
     float maxfov = 999.9f;  
@@ -34,6 +38,11 @@ void FeatureBase::Loop()
         if (plocalplayer == current)
             continue;
 
+        if (player->Health() < 1) 
+        {
+            continue;
+        }
+
         if (g_Vars->settings.visuals.enabled) 
         {
             Vector head;
@@ -41,9 +50,26 @@ void FeatureBase::Loop()
             if (SDK::World2Screen(player->HitBoxPos(0), head) && SDK::World2Screen(player->Position(), feet)) 
             {
                 float Height = (head.y - feet.y), Width = Height / 2.f;
+                ImColor defaultcolor = RED;
+
+                if (player->Team() == localteam) 
+                {
+                    defaultcolor = GREEN;
+                }
+                if (player->Knocked()) 
+                {
+                    defaultcolor = BLUE;
+                }
+                if (g_Vars->settings.visuals.showTarget) 
+                {
+                    if (current == lasttarget) 
+                    {
+                        defaultcolor = YELLOW;
+                    }
+                }
                 if (g_Vars->settings.visuals.box) 
                 {       
-                    Render::DrawBox(RED, feet.x - (Width / 2.f), feet.y, Width, Height);
+                    Render::DrawBox(defaultcolor, feet.x - (Width / 2.f), feet.y, Width, Height);
                 }
                 
                 int width = 2;
@@ -64,14 +90,50 @@ void FeatureBase::Loop()
 
         if (g_Vars->settings.aim.enabled) 
         {
-            Vector calcangle = SDK::CalculateAngle(camera, player->HitBoxPos(0));
+            Vector head = player->HitBoxPos(0);
+            Vector calcangle = SDK::CalculateAngle(camera, head);
             float fov = SDK::GetFOV(calcangle, viewangles);
 
             if (fov < maxfov && fov < g_Vars->settings.aim.maxfov) 
             {
+                if (g_Vars->settings.aim.teamCheck) 
+                {
+                    if (player->Team() == localteam) 
+                    {
+                        continue;
+                    }
+                }
+
+                if (g_Vars->settings.aim.knockCheck) 
+                {
+                    if (player->Knocked()) 
+                    {
+                        continue;
+                    }
+                }
+
+                if (SDK::Dist3D(camera, head) > g_Vars->settings.aim.maxdistance) 
+                {
+                    continue;
+                }
+                
                 maxfov = fov;
-                aimtarget = current;
+
+                if (!locktarget) 
+                {
+                    aimtarget = current;
+                } else {
+                    aimtarget = lasttarget;
+                }
             }
+        }
+    }
+
+    if (!locktarget) 
+    {
+        if (!aimtarget) 
+        {
+            lasttarget = 0;
         }
     }
 
@@ -79,8 +141,10 @@ void FeatureBase::Loop()
     {
         if (aimtarget) 
         {
+            lasttarget = aimtarget;
             if(GetKeyState(g_Vars->settings.aim.aimkey) & 0x8000) 
             {
+                locktarget = true;
                 EntityPlayer* player = new EntityPlayer(aimtarget);
                 Vector target = player->HitBoxPos(0);
 
@@ -136,7 +200,20 @@ void FeatureBase::Loop()
 
                 SmoothedAngles = SDK::ClampAngles(SmoothedAngles);
                 localplayer->WriteViewangles(SmoothedAngles);
-            }                    
-        }            
+                lasttarget = aimtarget;
+            } else 
+            {
+                locktarget = false;
+            }
+        }    
+    }
+
+    if (g_Vars->settings.visuals.fovCircle) 
+    {
+        ImVec2 center = ImVec2(g_Vars->width / 2, g_Vars->height / 2);
+
+        // Aimbot FOV / Game FOV * Game Resolution Width / 2 = Circle Radius
+        float radius = g_Vars->settings.aim.maxfov / 90 * g_Vars->width / 2;
+        Render::Circle(center, YELLOW, radius * 1.1f, 100, 2.0f);
     }
 }
