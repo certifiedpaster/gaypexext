@@ -121,6 +121,9 @@ bool MemoryReadable(char* ptr, size_t byteCount)
     if (mbi.Protect == PAGE_NOACCESS || mbi.Protect == PAGE_EXECUTE)
         return false;
 
+    if (!(mbi.Protect == PAGE_READWRITE || mbi.Protect == PAGE_READONLY)) 
+        return false;
+
     // This checks that the start of memory block is in the same "region" as the
     // end. If it isn't you "simplify" the problem into checking that the rest of 
     // the memory is readable.
@@ -163,29 +166,35 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
 		return 0;
 	}
 
+    // completely retarded access violation
     if (!(MemoryReadable((char*)buffer, (sizeof(USHORT) * 2)))) 
     {
-        printf("Invalid allocation at: %p\n", (char*)buffer);
+        printf("[e] Invalid allocation at: %p\n", (char*)buffer);
         return 0;
     }
 
 	PUNICODE_STRING unistr = (PUNICODE_STRING)buffer;
-    if (unistr->Length < 5 || unistr->Length >= bufferSize) 
+    if (unistr->Length < 5 || unistr->Length >= 250) 
     {
+        printf("[e] Invalid size for: %p\n", (char*)unistr);
         return 0;
     }
 
-    if (MemoryReadable((char*)unistr, unistr->Length)) 
+    if (MemoryReadable((char*)unistr->Buffer, unistr->Length)) 
     {
-        char* multi = (char*)malloc(unistr->Length);
+        char* multi = (char*)malloc((int)unistr->Length);
         if (!multi) return 0;
+        memset(multi, 0, unistr->Length);
+
         WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);
         free(buffer);
+
+        printf("[m] %s\n", multi);
 
         return multi;
     } else 
     {
-        printf("Invalid memory region at: %p\n", (char*)unistr);
+        printf("[e] Invalid memory region at: %p\n", (char*)unistr);
         return 0;
     }
 }
@@ -308,4 +317,28 @@ ModuleInfo GetProcessModules(int pid)
 
 	CloseHandle(proc);
 	return mi;
+}
+
+uintptr_t GetBaseUsermode(int pid, const std::wstring modulename)
+{
+    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+	DWORD dwModuleBaseAddress = 0;
+	if (hSnapshot != INVALID_HANDLE_VALUE)
+	{
+		MODULEENTRY32 ModuleEntry32 = { 0 };
+		ModuleEntry32.dwSize = sizeof(MODULEENTRY32);
+		if (Module32First(hSnapshot, &ModuleEntry32))
+		{
+			do
+			{
+				if (!modulename.compare(ModuleEntry32.szModule))
+				{
+					dwModuleBaseAddress = (uintptr_t)ModuleEntry32.modBaseAddr;
+					break;
+				}
+			} while (Module32Next(hSnapshot, &ModuleEntry32));
+		}
+		CloseHandle(hSnapshot);
+	}
+	return dwModuleBaseAddress;
 }

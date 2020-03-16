@@ -5,6 +5,7 @@
 #include "overlay.h"
 #include "console.h"
 #include "utils.h"
+#include "activation/activation.h"
 //#include "activation/activation.h"
 
 GlobalVars* g_Vars;
@@ -62,29 +63,37 @@ void OfflineSettings()
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{      
-    g_Vars = (GlobalVars*)malloc(sizeof(GlobalVars));
+{            
+    Sleep(1000);
+    
+    g_Vars = new GlobalVars();
     g_Vars->activated = false;
     g_Vars->shouldExit = false;
     g_Vars->ready = false;
 
+    OfflineOffsets();
+    OfflineSettings();
+
     if (TESTBUILD) 
     {
         Console::WriteLog("Starting in debug mode...");
-        OfflineOffsets();
-        OfflineSettings();
-
         Console::WriteLog("Allocating and connecting to system console...");
         AllocConsole();
         freopen_s((FILE**)stdin,  "CONIN$", "r",  stdin);
         freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); 
+        printf("GVAR size: %i", sizeof(GlobalVars));
         
         g_Vars->activated = true;
     } else 
     {
-        // TODO: server connection socket.io
-        // load offsets from server
+        // TODO: load offsets from server
+        g_Vars->activated = Activation::Activate();
     }
+
+    //TODO: remove
+    AllocConsole();
+    freopen_s((FILE**)stdin,  "CONIN$", "r",  stdin);
+    freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
     
     Console::WriteLog("Creating threads...");
     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Overlay::Loop, nullptr, 0, nullptr);
@@ -106,13 +115,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     Console::WriteLog("Trying to connect to the driver...");
     g_Drv = new Driver();
     g_Drv->Init(pid);   
+    int test = g_Drv->Read<int>(g_Vars->apexBase);
+    Console::WriteLog("Test read: %i", test);
 
     Console::WriteLog("Using offsets from %s", Utils::UnixDate(g_Vars->offsets.lastupdate).c_str());
-    
-    while (!g_Vars->activated) 
-    {
-        Sleep(1000);
-    }
 
     if (!g_Vars->shouldExit)
         g_Vars->ready = true;
@@ -122,8 +128,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         Sleep(1000);
     }
 
-    Console::WriteLog("Exit signal received. Exiting.");
     g_Vars->ready = false;
+    Console::WriteLog("Exit signal received. Exiting.");
     Sleep(5000);
 
     return 0;

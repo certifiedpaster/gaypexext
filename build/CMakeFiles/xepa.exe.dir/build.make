@@ -57,9 +57,57 @@ include CMakeFiles/xepa.exe.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/xepa.exe.dir/flags.make
 
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o: CMakeFiles/xepa.exe.dir/flags.make
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o: ../src/activation/SlimMem.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o"
+	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc
+
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.i"
+	/usr/bin/x86_64-w64-mingw32-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc > CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.i
+
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.s"
+	/usr/bin/x86_64-w64-mingw32-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc -o CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.s
+
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.requires:
+
+.PHONY : CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.requires
+
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.provides: CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.requires
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.provides.build
+.PHONY : CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.provides
+
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.provides.build: CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o
+
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: CMakeFiles/xepa.exe.dir/flags.make
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/activation/activation.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o"
+	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/xepa.exe.dir/src/activation/activation.cc.i"
+	/usr/bin/x86_64-w64-mingw32-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc > CMakeFiles/xepa.exe.dir/src/activation/activation.cc.i
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/xepa.exe.dir/src/activation/activation.cc.s"
+	/usr/bin/x86_64-w64-mingw32-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc -o CMakeFiles/xepa.exe.dir/src/activation/activation.cc.s
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.requires:
+
+.PHONY : CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.requires
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.provides: CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.requires
+	$(MAKE) -f CMakeFiles/xepa.exe.dir/build.make CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.provides.build
+.PHONY : CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.provides
+
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.provides.build: CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o
+
+
 CMakeFiles/xepa.exe.dir/src/console.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/console.cc.o: ../src/console.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/xepa.exe.dir/src/console.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/xepa.exe.dir/src/console.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/console.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.cc
 
 CMakeFiles/xepa.exe.dir/src/console.cc.i: cmake_force
@@ -83,7 +131,7 @@ CMakeFiles/xepa.exe.dir/src/console.cc.o.provides.build: CMakeFiles/xepa.exe.dir
 
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/xepa.exe.dir/src/driver.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/xepa.exe.dir/src/driver.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/driver.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.cc
 
 CMakeFiles/xepa.exe.dir/src/driver.cc.i: cmake_force
@@ -107,7 +155,7 @@ CMakeFiles/xepa.exe.dir/src/driver.cc.o.provides.build: CMakeFiles/xepa.exe.dir/
 
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/features/base.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/xepa.exe.dir/src/features/base.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/xepa.exe.dir/src/features/base.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/features/base.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/features/base.cc
 
 CMakeFiles/xepa.exe.dir/src/features/base.cc.i: cmake_force
@@ -131,7 +179,7 @@ CMakeFiles/xepa.exe.dir/src/features/base.cc.o.provides.build: CMakeFiles/xepa.e
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o: ../src/imgui/imgui.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.i: cmake_force
@@ -155,7 +203,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui.cc.o.provides.build: CMakeFiles/xepa.exe
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o: ../src/imgui/imgui_demo.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_demo.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.i: cmake_force
@@ -179,7 +227,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui_demo.cc.o.provides.build: CMakeFiles/xep
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o: ../src/imgui/imgui_draw.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_draw.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.i: cmake_force
@@ -203,7 +251,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui_draw.cc.o.provides.build: CMakeFiles/xep
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o: ../src/imgui/imgui_impl_dx9.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_impl_dx9.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.i: cmake_force
@@ -227,7 +275,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_dx9.cc.o.provides.build: CMakeFiles
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o: ../src/imgui/imgui_impl_win32.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_impl_win32.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.i: cmake_force
@@ -251,7 +299,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui_impl_win32.cc.o.provides.build: CMakeFil
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o: ../src/imgui/imgui_widgets.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/imgui/imgui_widgets.cc
 
 CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.i: cmake_force
@@ -275,7 +323,7 @@ CMakeFiles/xepa.exe.dir/src/imgui/imgui_widgets.cc.o.provides.build: CMakeFiles/
 
 CMakeFiles/xepa.exe.dir/src/main.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/xepa.exe.dir/src/main.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/xepa.exe.dir/src/main.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/main.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/main.cc
 
 CMakeFiles/xepa.exe.dir/src/main.cc.i: cmake_force
@@ -299,7 +347,7 @@ CMakeFiles/xepa.exe.dir/src/main.cc.o.provides.build: CMakeFiles/xepa.exe.dir/sr
 
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/overlay.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/xepa.exe.dir/src/overlay.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/xepa.exe.dir/src/overlay.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/overlay.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.cc
 
 CMakeFiles/xepa.exe.dir/src/overlay.cc.i: cmake_force
@@ -323,7 +371,7 @@ CMakeFiles/xepa.exe.dir/src/overlay.cc.o.provides.build: CMakeFiles/xepa.exe.dir
 
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: CMakeFiles/xepa.exe.dir/flags.make
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/utils.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/xepa.exe.dir/src/utils.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/xepa.exe.dir/src/utils.cc.o"
 	/usr/bin/x86_64-w64-mingw32-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/xepa.exe.dir/src/utils.cc.o -c /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.cc
 
 CMakeFiles/xepa.exe.dir/src/utils.cc.i: cmake_force
@@ -347,6 +395,8 @@ CMakeFiles/xepa.exe.dir/src/utils.cc.o.provides.build: CMakeFiles/xepa.exe.dir/s
 
 # Object files for target xepa.exe
 xepa_exe_OBJECTS = \
+"CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o" \
+"CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o" \
 "CMakeFiles/xepa.exe.dir/src/console.cc.o" \
 "CMakeFiles/xepa.exe.dir/src/driver.cc.o" \
 "CMakeFiles/xepa.exe.dir/src/features/base.cc.o" \
@@ -363,6 +413,8 @@ xepa_exe_OBJECTS = \
 # External object files for target xepa.exe
 xepa_exe_EXTERNAL_OBJECTS =
 
+xepa.exe: CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o
+xepa.exe: CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o
 xepa.exe: CMakeFiles/xepa.exe.dir/src/console.cc.o
 xepa.exe: CMakeFiles/xepa.exe.dir/src/driver.cc.o
 xepa.exe: CMakeFiles/xepa.exe.dir/src/features/base.cc.o
@@ -377,7 +429,7 @@ xepa.exe: CMakeFiles/xepa.exe.dir/src/overlay.cc.o
 xepa.exe: CMakeFiles/xepa.exe.dir/src/utils.cc.o
 xepa.exe: CMakeFiles/xepa.exe.dir/build.make
 xepa.exe: CMakeFiles/xepa.exe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable xepa.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/q/Desktop/amlegit/projects/xepa/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable xepa.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/xepa.exe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -385,6 +437,8 @@ CMakeFiles/xepa.exe.dir/build: xepa.exe
 
 .PHONY : CMakeFiles/xepa.exe.dir/build
 
+CMakeFiles/xepa.exe.dir/requires: CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o.requires
+CMakeFiles/xepa.exe.dir/requires: CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o.requires
 CMakeFiles/xepa.exe.dir/requires: CMakeFiles/xepa.exe.dir/src/console.cc.o.requires
 CMakeFiles/xepa.exe.dir/requires: CMakeFiles/xepa.exe.dir/src/driver.cc.o.requires
 CMakeFiles/xepa.exe.dir/requires: CMakeFiles/xepa.exe.dir/src/features/base.cc.o.requires

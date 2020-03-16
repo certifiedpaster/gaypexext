@@ -398,44 +398,53 @@ void Helper::RenderMenu()
 	ImGui::Text("To start please configure the cheat bellow. If you are not sure what \noptions to use you can use one of our configs which is on our Discord.");
     ImGui::Text("You are currently using plus version.");
 
-    if (ImGui::CollapsingHeader("Aim")) 
+    if (g_Vars->activated) 
     {
-        ImGui::Checkbox("Enable aim", &g_Vars->settings.aim.enabled);
-        int maxfov = (int)g_Vars->settings.aim.maxfov;
-        ImGui::SliderInt("Max FOV", &maxfov, 1, 180);
-        g_Vars->settings.aim.maxfov = (float)maxfov;
-        ImGui::Checkbox("No recoil", &g_Vars->settings.aim.nopunch);
-        
-        std::stringstream stream;
-        stream << std::hex << g_Vars->settings.aim.aimkey;
-        std::string aimkey = "Change aim key (" + stream.str() + ")";
-        ImGui::Button(aimkey.c_str()); // TODO: change
+        if (ImGui::CollapsingHeader("Aim")) 
+        {
+            ImGui::Checkbox("Enable aim", &g_Vars->settings.aim.enabled);
+            int maxfov = (int)g_Vars->settings.aim.maxfov;
+            ImGui::SliderInt("Max FOV", &maxfov, 1, 180);
+            g_Vars->settings.aim.maxfov = (float)maxfov;
+            ImGui::Checkbox("No recoil", &g_Vars->settings.aim.nopunch);
+            
+            std::stringstream stream;
+            stream << std::hex << g_Vars->settings.aim.aimkey;
+            std::string aimkey = "Change aim key (" + stream.str() + ")";
+            ImGui::Button(aimkey.c_str()); // TODO: change
 
-        ImGui::Checkbox("Smooth", &g_Vars->settings.aim.smooth);
-        ImGui::SliderInt("Divider", &g_Vars->settings.aim.divider, 100, 1000);
+            ImGui::Checkbox("Smooth", &g_Vars->settings.aim.smooth);
+            ImGui::SliderInt("Divider", &g_Vars->settings.aim.divider, 100, 1000);
 
-        ImGui::Checkbox("Predict gravity", &g_Vars->settings.aim.gravity);
-        ImGui::Checkbox("Predict velocity", &g_Vars->settings.aim.velocity);
-    }
-    if (ImGui::CollapsingHeader("Visuals")) 
+            ImGui::Checkbox("Predict gravity", &g_Vars->settings.aim.gravity);
+            ImGui::Checkbox("Predict velocity", &g_Vars->settings.aim.velocity);
+        }
+        if (ImGui::CollapsingHeader("Visuals")) 
+        {
+            ImGui::Checkbox("Enable visuals", &g_Vars->settings.visuals.enabled);
+            ImGui::Checkbox("Box", &g_Vars->settings.visuals.box);
+            ImGui::Checkbox("Health", &g_Vars->settings.visuals.health);
+            ImGui::Checkbox("Shield", &g_Vars->settings.visuals.shield);
+        }
+        if (ImGui::CollapsingHeader("About"))
+        {
+            ImGui::Text("Copyright (c) 2020 amlegit.com - All rights reserved");
+            ImGui::Text("Build on: %s", __DATE__);
+            ImGui::Text("Build in: %s", __TIME__);
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        }
+    } else 
     {
-        ImGui::Checkbox("Enable visuals", &g_Vars->settings.visuals.enabled);
-        ImGui::Checkbox("Box", &g_Vars->settings.visuals.box);
-        ImGui::Checkbox("Health", &g_Vars->settings.visuals.health);
-        ImGui::Checkbox("Shield", &g_Vars->settings.visuals.shield);
+        ImGui::Text("Not activated. Look at console.");
     }
-    if (ImGui::CollapsingHeader("About"))
-	{
-		ImGui::Text("Copyright (c) 2020 amlegit.com - All rights reserved");
-		ImGui::Text("Build on: %s", __DATE__);
-		ImGui::Text("Build in: %s", __TIME__);
-		ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	}
 
     ImGui::End();
 }
 
 void Helper::RenderFeatures()
 {
+    if (!g_Vars->activated)
+        return;
+
     FeatureBase::Loop();
 }

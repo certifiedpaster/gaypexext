@@ -6,6 +6,44 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc
+SlimMem.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
+windows.h
+-
+tlhelp32.h
+-
+psapi.h
+-
+map
+-
+string
+-
+cctype
+-
+algorithm
+-
+cassert
+-
+type_traits
+-
+iostream
+-
+memory
+-
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc
+SlimMem.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
+activation.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
+../console.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
+
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/charfix.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.cc
@@ -259,6 +297,8 @@ console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
 utils.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+activation/activation.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.cc
 globals.h

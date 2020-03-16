@@ -9,6 +9,7 @@ namespace Utils
     uintptr_t GetBase(int pid, const char* modulename);
     void LimitFPS(int targetfps);
     void RandomText(char *s, const int len);
+    std::wstring ToWideChar(const std::string& str);
 }
 
 #endif
