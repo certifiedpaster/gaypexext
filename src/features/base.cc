@@ -111,6 +111,7 @@ void FeatureBase::Loop()
 
                 Vector calcangle = SDK::CalculateAngle(camera, target);
                 Vector Delta = calcangle - viewangles;
+                Delta = SDK::ClampAngles(Delta);
                 
                 if (g_Vars->settings.aim.smooth && abs(Delta.x) > 0.009f && abs(Delta.y) > 0.009f)
                 {
