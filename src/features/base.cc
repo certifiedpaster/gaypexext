@@ -135,9 +135,6 @@ void FeatureBase::Loop()
                 }
 
                 SmoothedAngles = SDK::ClampAngles(SmoothedAngles);
-
-                printf("delta: %f %f %f\n", Delta.x, Delta.y, Delta.z);
-                printf("final: %f %f %f\n", SmoothedAngles.x, SmoothedAngles.y, SmoothedAngles.z);
                 localplayer->WriteViewangles(SmoothedAngles);
             }                    
         }            

@@ -109,6 +109,31 @@ RtlFreeHeap(
     PVOID BaseAddress
 );
 
+bool MemoryReadable(char* ptr, size_t byteCount)
+{
+    MEMORY_BASIC_INFORMATION mbi;
+    if (VirtualQuery(ptr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
+        return false;
+
+    if (mbi.State != MEM_COMMIT)
+        return false;
+
+    if (mbi.Protect == PAGE_NOACCESS || mbi.Protect == PAGE_EXECUTE)
+        return false;
+
+    // This checks that the start of memory block is in the same "region" as the
+    // end. If it isn't you "simplify" the problem into checking that the rest of 
+    // the memory is readable.
+    size_t blockOffset = (size_t)((char *)ptr - (char *)mbi.AllocationBase);
+    size_t blockBytesPostPtr = mbi.RegionSize - blockOffset;
+
+    if (blockBytesPostPtr < byteCount)
+        return MemoryReadable(ptr + blockBytesPostPtr,
+                            byteCount - blockBytesPostPtr);
+
+    return true;
+}
+
 char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress) 
 {
 	int bufferSize = 0x100;
@@ -138,22 +163,31 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
 		return 0;
 	}
 
+    if (!(MemoryReadable((char*)buffer, (sizeof(USHORT) * 2)))) 
+    {
+        printf("Invalid allocation at: %p\n", (char*)buffer);
+        return 0;
+    }
+
 	PUNICODE_STRING unistr = (PUNICODE_STRING)buffer;
     if (unistr->Length < 5 || unistr->Length >= bufferSize) 
     {
         return 0;
     }
 
-    printf("unistr: %u\n", unistr->Length);
-    printf("bufferSize: %i\n", bufferSize);
+    if (MemoryReadable((char*)unistr, unistr->Length)) 
+    {
+        char* multi = (char*)malloc(unistr->Length);
+        if (!multi) return 0;
+        WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);
+        free(buffer);
 
-	char* multi = (char*)malloc(unistr->Length);
-    if (!multi) return 0;
-	// WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
-	WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);
-	free(buffer);
-
-	return multi;
+        return multi;
+    } else 
+    {
+        printf("Invalid memory region at: %p\n", (char*)unistr);
+        return 0;
+    }
 }
 
 #define PTR_ADD_OFFSET(Pointer, Offset) ((PVOID)((ULONG_PTR)(Pointer) + (ULONG_PTR)(Offset)))
