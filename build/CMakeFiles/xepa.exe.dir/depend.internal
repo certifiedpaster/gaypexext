@@ -4,11 +4,13 @@
 CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 CMakeFiles/xepa.exe.dir/src/console.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
@@ -18,6 +20,7 @@ CMakeFiles/xepa.exe.dir/src/driver.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
@@ -83,6 +86,7 @@ CMakeFiles/xepa.exe.dir/src/main.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/main.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
@@ -96,9 +100,11 @@ CMakeFiles/xepa.exe.dir/src/overlay.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/style.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 CMakeFiles/xepa.exe.dir/src/utils.cc.o
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/charfix.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/legacy.h
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.cc
  /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+ /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h

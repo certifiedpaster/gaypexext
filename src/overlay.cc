@@ -18,6 +18,7 @@
 #include <sstream>
 #include "style.h"
 #include "utils.h"
+#include "vmprotect.h"
 
 static LPDIRECT3D9              g_pD3D = NULL;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = NULL;
@@ -112,7 +113,7 @@ void Overlay::Loop(void* blank)
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
-    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 18.0f);
+    ImFont* font = io.Fonts->AddFontFromFileTTF(E("c:\\Windows\\Fonts\\Arial.ttf"), 18.0f);
     //IM_ASSERT(font != NULL);
 
     g_Vars->width = GetScreenInfo().width;
@@ -282,7 +283,7 @@ std::string GetTime()
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	strftime(buffer, sizeof(buffer), "%H:%M:%S", timeinfo);
+	strftime(buffer, sizeof(buffer), E("%H:%M:%S"), timeinfo);
 	std::string str(buffer);
 
 	return str;
@@ -375,7 +376,7 @@ void Render::Progress(int x, int y, int w, int h, int phealth)
 
 void Helper::RenderStatic() 
 {      
-    std::string toptext = "amlegit.com\n";
+    std::string toptext = E("amlegit.com\n");
 	toptext += GetTime();
 	const char* text = toptext.c_str();
     Render::EasyText(ImVec2(10, 10), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), text);
@@ -415,29 +416,29 @@ void Helper::RenderMenu()
 	windowflags |= ImGuiWindowFlags_NoResize;
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_Always);
     
-    ImGui::Begin("amlegit.com", NULL, windowflags);
+    ImGui::Begin(E("amlegit.com"), NULL, windowflags);
 
-    ImGui::Text("Welcome fellow cheater!");
-	ImGui::Text("To start please configure the cheat bellow. If you are not sure what \noptions to use you can use one of our configs which is on our Discord.");
-    ImGui::Text("You are currently using plus version.");
+    ImGui::Text(E("Welcome fellow cheater!"));
+	ImGui::Text(E("To start please configure the cheat bellow. If you are not sure what \noptions to use you can use one of our configs which is on our Discord."));
+    ImGui::Text(E("You are currently using plus version."));
 
     if (g_Vars->activated) 
     {
-        if (ImGui::CollapsingHeader("Aim")) 
+        if (ImGui::CollapsingHeader(E("Aim"))) 
         {
-            ImGui::Checkbox("Enable aim", &g_Vars->settings.aim.enabled);
+            ImGui::Checkbox(E("Enable aim"), &g_Vars->settings.aim.enabled);
             int maxfov = (int)g_Vars->settings.aim.maxfov;
-            ImGui::SliderInt("Max FOV", &maxfov, 1, 180);
+            ImGui::SliderInt(E("Max FOV"), &maxfov, 1, 180);
             g_Vars->settings.aim.maxfov = (float)maxfov;
-            ImGui::Checkbox("No recoil", &g_Vars->settings.aim.nopunch);
-            ImGui::SliderInt("Max distance", &g_Vars->settings.aim.maxdistance, 50, 20000);
+            ImGui::Checkbox(E("No recoil"), &g_Vars->settings.aim.nopunch);
+            ImGui::SliderInt(E("Max distance"), &g_Vars->settings.aim.maxdistance, 50, 20000);
             
             std::stringstream stream;
             stream << std::hex << g_Vars->settings.aim.aimkey;
-            std::string aimkey = "Change aim key (" + stream.str() + ")";
+            std::string aimkey = E("Change aim key (") + stream.str() + ")";
             if (keystatus == 1) 
             {
-                aimkey = "Press key to bind";
+                aimkey = E("Press key to bind");
             }
             if (ImGui::Button(aimkey.c_str())) 
             {
@@ -447,34 +448,34 @@ void Helper::RenderMenu()
                 }
             }
 
-            ImGui::Checkbox("Smooth", &g_Vars->settings.aim.smooth);
-            ImGui::SliderInt("Divider", &g_Vars->settings.aim.divider, 100, 1000);
+            ImGui::Checkbox(E("Smooth"), &g_Vars->settings.aim.smooth);
+            ImGui::SliderInt(E("Divider"), &g_Vars->settings.aim.divider, 100, 1000);
 
-            ImGui::Checkbox("Predict gravity", &g_Vars->settings.aim.gravity);
-            ImGui::Checkbox("Predict velocity", &g_Vars->settings.aim.velocity);
+            ImGui::Checkbox(E("Predict gravity"), &g_Vars->settings.aim.gravity);
+            ImGui::Checkbox(E("Predict velocity"), &g_Vars->settings.aim.velocity);
             
-            ImGui::Checkbox("Team check", &g_Vars->settings.aim.teamCheck);
-            ImGui::Checkbox("Knock check", &g_Vars->settings.aim.knockCheck);
+            ImGui::Checkbox(E("Team check"), &g_Vars->settings.aim.teamCheck);
+            ImGui::Checkbox(E("Knock check"), &g_Vars->settings.aim.knockCheck);
         }
-        if (ImGui::CollapsingHeader("Visuals")) 
+        if (ImGui::CollapsingHeader(E("Visuals"))) 
         {
-            ImGui::Checkbox("Enable visuals", &g_Vars->settings.visuals.enabled);
-            ImGui::Checkbox("Box", &g_Vars->settings.visuals.box);
-            ImGui::Checkbox("Health", &g_Vars->settings.visuals.health);
-            ImGui::Checkbox("Shield", &g_Vars->settings.visuals.shield);
-            ImGui::Checkbox("Hightlight target", &g_Vars->settings.visuals.showTarget);
-            ImGui::Checkbox("FOV circle", &g_Vars->settings.visuals.fovCircle);
+            ImGui::Checkbox(E("Enable visuals"), &g_Vars->settings.visuals.enabled);
+            ImGui::Checkbox(E("Box"), &g_Vars->settings.visuals.box);
+            ImGui::Checkbox(E("Health"), &g_Vars->settings.visuals.health);
+            ImGui::Checkbox(E("Shield"), &g_Vars->settings.visuals.shield);
+            ImGui::Checkbox(E("Hightlight target"), &g_Vars->settings.visuals.showTarget);
+            ImGui::Checkbox(E("FOV circle"), &g_Vars->settings.visuals.fovCircle);
         }
         if (ImGui::CollapsingHeader("About"))
         {
-            ImGui::Text("Copyright (c) 2020 amlegit.com - All rights reserved");
-            ImGui::Text("Build on: %s", __DATE__);
-            ImGui::Text("Build in: %s", __TIME__);
-            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::Text(E("Copyright (c) 2020 amlegit.com - All rights reserved"));
+            ImGui::Text(E("Build on: %s"), E(__DATE__));
+            ImGui::Text(E("Build in: %s"), E(__TIME__));
+            ImGui::Text(E("%.3f ms/frame (%.1f FPS)"), 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         }
     } else 
     {
-        ImGui::Text("Not activated. Look at console.");
+        ImGui::Text(E("Not activated. Look at console."));
     }
 
     ImGui::End();

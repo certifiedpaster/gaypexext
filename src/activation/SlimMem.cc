@@ -1,4 +1,5 @@
 #include "SlimMem.h"
+#include "../vmprotect.h"
     
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion-null"
@@ -29,24 +30,32 @@ namespace SlimUtils {
     
     bool SlimMem::Open(const wchar_t * lpwstrProcessName, ProcessAccess flags)
     {
+        ProtectStart();
         return this->Open(lpwstrProcessName, (DWORD)flags);
+        ProtectEnd();
     }
     
     bool SlimMem::Open(const wchar_t * lpwstrProcessName, DWORD flags)
     {
+        ProtectStart();
         DWORD pid;
         if (GetPID(lpwstrProcessName, &pid))
             return this->Open(pid, flags);
         return false;
+        ProtectEnd();
     }
     
     bool SlimMem::Open(DWORD dwPID, ProcessAccess flags)
     {
+        ProtectStart();
         return this->Open(dwPID, (DWORD)flags);
+        ProtectEnd();
     }
     
     bool SlimMem::Open(DWORD dwPID, DWORD dwFlags)
     {
+        ProtectStart();
+        
         if (this->HasProcessHandle())
             return false;
     
@@ -56,6 +65,8 @@ namespace SlimUtils {
             this->ParseModules();
     
         return this->HasProcessHandle();
+
+        ProtectEnd();
     }
 #pragma endregion
     
@@ -66,6 +77,8 @@ namespace SlimUtils {
     */
     BOOL SlimMem::GetPID(const wchar_t * lpwstrProcessName, DWORD* pid)
     {
+        ProtectStart();
+        
         PROCESSENTRY32W proc;
         proc.dwSize = sizeof(PROCESSENTRY32W);
         HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -87,6 +100,8 @@ namespace SlimUtils {
     
         ProperlyCloseHandle(hSnap);
         return false;
+
+        ProtectEnd();
     }
     
     /*
@@ -95,6 +110,8 @@ namespace SlimUtils {
     */
     bool SlimMem::ParseModules()
     {
+        ProtectStart();
+        
         if (!this->HasProcessHandle())
             return false;
     
@@ -114,19 +131,20 @@ namespace SlimUtils {
                         m_mModules[ToLower(mod.szModule)] = make_unique<SlimModule>(mod, *this);
                 }
                 catch (...) {
-#ifdef REPORT_ERRORS
-                    std::cout << "[SlimMem] Failed to parse module \"" << mod.szModule << "\"" << std::endl;
-#endif
                 }
             } while (Module32NextW(hSnap, &mod));
         }
     
         ProperlyCloseHandle(hSnap);
         return true;
+
+        ProtectEnd();
     }
     
     SigScanResult SlimMem::PerformSigScan(const BYTE * bufPattern, const char * lpcstrMask, const wchar_t * lpwstrModuleName, DWORD startFromOffset)
     {
+        ProtectStart();
+        
         auto module = this->GetModule(lpwstrModuleName);
         if (module == nullptr)
             return SigScanResult(false);
@@ -166,16 +184,22 @@ namespace SlimUtils {
         delete[] dump;
     
         return SigScanResult(false);
+
+        ProtectEnd();
     }
     
     const SlimModule* SlimMem::GetModule(const wchar_t * lpwstrModuleName) const
     {
+        ProtectStart();
+        
         std::wstring name = ToLower(std::wstring(lpwstrModuleName));
         auto val = m_mModules.find(name);
         if (val == m_mModules.end())
             return nullptr;
     
         return (*val).second.get();
+
+        ProtectEnd();
     }
     
 #pragma endregion

@@ -6,6 +6,7 @@
 #include "console.h"
 #include "utils.h"
 #include "activation/activation.h"
+#include "vmprotect.h"
 //#include "activation/activation.h"
 
 GlobalVars* g_Vars;
@@ -13,6 +14,8 @@ Driver* g_Drv;
 
 void OfflineOffsets() 
 {
+    ProtectStart();
+    
     // updated: 3/11/2020
     g_Vars->offsets.lastupdate = 1583943005;
     
@@ -39,10 +42,14 @@ void OfflineOffsets()
 
     g_Vars->offsets.bulletSpeed = 0x1d2c;
     g_Vars->offsets.bulletGravity = 0x1d34;
+
+    ProtectEnd();
 }
 
 void OfflineSettings() 
 {
+    ProtectStart();
+    
     g_Vars->settings.maxfps = 60;
     
     g_Vars->settings.visuals.enabled = true;
@@ -66,11 +73,27 @@ void OfflineSettings()
     
     g_Vars->settings.aim.teamCheck = true;
     g_Vars->settings.aim.knockCheck = true;
+
+    ProtectEnd();
+}
+
+void CheckProcess(void* blank) 
+{
+    while (true) 
+    {
+        if (Utils::FindProcess(EW(L"r5apex.exe")) == 0) 
+        {
+            Console::WriteLog("Game is not running anymore!");
+            g_Vars->shouldExit = true;
+            return;
+        }
+        Sleep(1000);
+    }
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {            
-    Sleep(1000);
+    ProtectStart();
     
     g_Vars = new GlobalVars();
     g_Vars->activated = false;
@@ -82,12 +105,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     if (TESTBUILD) 
     {
-        Console::WriteLog("Starting in debug mode...");
-        Console::WriteLog("Allocating and connecting to system console...");
+        Console::WriteLog(E("Starting in debug mode..."));
+        Console::WriteLog(E("Allocating and connecting to system console..."));
         AllocConsole();
-        freopen_s((FILE**)stdin,  "CONIN$", "r",  stdin);
-        freopen_s((FILE**)stdout, "CONOUT$", "w", stdout); 
-        printf("GVAR size: %i", sizeof(GlobalVars));
+        freopen_s((FILE**)stdin,  E("CONIN$"), "r",  stdin);
+        freopen_s((FILE**)stdout, E("CONOUT$"), "w", stdout); 
+        printf(E("GVAR size: %i"), sizeof(GlobalVars));
         
         g_Vars->activated = true;
     } else 
@@ -95,39 +118,36 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // TODO: load offsets from server
         g_Vars->activated = Activation::Activate();
     }
-
-    //TODO: remove
-    AllocConsole();
-    freopen_s((FILE**)stdin,  "CONIN$", "r",  stdin);
-    freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
     
-    Console::WriteLog("Creating threads...");
+    Console::WriteLog(E("Creating threads..."));
     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Overlay::Loop, nullptr, 0, nullptr);
     CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Console::DisplayLoop, nullptr, 0, nullptr);
+    CreateThread(0, 0, (LPTHREAD_START_ROUTINE)CheckProcess, nullptr, 0, nullptr);
 
-    Console::WriteLog("Getting program info...");
-    int pid = Utils::FindProcess(L"r5apex.exe");
-    Console::WriteLog("Game PID is %i", pid);
-    uintptr_t baseaddr = Utils::GetBase(pid, "r5apex.exe");
-    Console::WriteLog("Game base address is %llx", baseaddr);
+    Console::WriteLog(E("Getting program info..."));
+    int pid = Utils::FindProcess(EW(L"r5apex.exe"));
+    Console::WriteLog(E("Game PID is %i"), pid);
+    uintptr_t baseaddr = Utils::GetBase(pid, E("r5apex.exe"));
+    Console::WriteLog(E("Game base address is %llx"), baseaddr);
     g_Vars->apexBase = baseaddr;
 
     if (!pid || !baseaddr) 
     {
         g_Vars->shouldExit = true;
-        Console::WriteLog("Failed to get process information");
+        Console::WriteLog(E("Failed to get process information"));
     }
     
-    Console::WriteLog("Trying to connect to the driver...");
-    g_Drv = new Driver();
-    g_Drv->Init(pid);   
-    int test = g_Drv->Read<int>(g_Vars->apexBase);
-    Console::WriteLog("Test read: %i", test);
+    if (!g_Vars->shouldExit) 
+    {
+        Console::WriteLog(E("Trying to connect to the driver..."));
+        g_Drv = new Driver();
+        g_Drv->Init(pid);   
+        int test = g_Drv->Read<int>(g_Vars->apexBase);
+        Console::WriteLog(E("Test read: %i"), test);
 
-    Console::WriteLog("Using offsets from %s", Utils::UnixDate(g_Vars->offsets.lastupdate).c_str());
-
-    if (!g_Vars->shouldExit)
+        Console::WriteLog(E("Using offsets from %s"), Utils::UnixDate(g_Vars->offsets.lastupdate).c_str());
         g_Vars->ready = true;
+    }
 
     while (!g_Vars->shouldExit) 
     {
@@ -135,8 +155,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     g_Vars->ready = false;
-    Console::WriteLog("Exit signal received. Exiting.");
+    Console::WriteLog(E("Exit signal received. Exiting."));
     Sleep(5000);
 
     return 0;
+
+    ProtectEnd();
 }

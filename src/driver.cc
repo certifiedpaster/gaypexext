@@ -1,6 +1,7 @@
 #include <windows.h>
 #include "driver.h"
 #include "console.h"
+#include "vmprotect.h"
 
 #define IOCTL_READ CTL_CODE(FILE_DEVICE_UNKNOWN, 0x9372, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
 void Driver::UnsafeRead(PVOID pTarget, PVOID pLocal, ULONG DataSize)
@@ -28,17 +29,21 @@ Driver::DrvAllocFreeInfo Driver::UnsafeAlloc(ULONG RegSize)
 
 void Driver::Init(int pid) 
 {
+    ProtectStart();
+    
     _pid = pid;
-    HANDLE drvhandle = CreateFileW(L"\\\\.\\GpuEnergyDrv", GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE drvhandle = CreateFileW(EW(L"\\\\.\\GpuEnergyDrv"), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (drvhandle == INVALID_HANDLE_VALUE || !drvhandle) 
     {
-        Console::WriteLog("Failed to open driver handle!");
+        Console::WriteLog(E("Failed to open driver handle!"));
     } else 
     {
         _handle = drvhandle;
         _init = true;
-        Console::WriteLog("Handle: %p", _handle);
+        Console::WriteLog(E("Handle: %p"), _handle);
     }
+
+    ProtectEnd();
 }
 
 /*

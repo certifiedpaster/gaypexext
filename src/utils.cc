@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "legacy.h"
 #include "console.h"
+#include "vmprotect.h"
 
 std::string Utils::UnixDate(int date) 
 {
@@ -25,7 +26,9 @@ std::string Utils::UnixDate(int date)
 
 int Utils::FindProcess(const wchar_t* proc)
 {
-	auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	ProtectStart();
+    
+    auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 	auto pe = PROCESSENTRY32{ sizeof(PROCESSENTRY32) };
 
 	if (Process32First(snapshot, &pe)) {
@@ -38,6 +41,8 @@ int Utils::FindProcess(const wchar_t* proc)
 	}
 	CloseHandle(snapshot);
 	return 0;
+
+    ProtectEnd();
 }
 
 std::wstring Utils::ToWideChar(const std::string& str)
@@ -50,6 +55,8 @@ std::wstring Utils::ToWideChar(const std::string& str)
 
 uintptr_t Utils::GetBase(int pid, const char* modulename) 
 {
+    ProtectStart();
+    
     ModuleInfo mi = GetProcessModules(pid);
     for (int i = 0; i < MODULE_MAX; i++) 
     {
@@ -62,6 +69,8 @@ uintptr_t Utils::GetBase(int pid, const char* modulename)
         }
     }
     return 0;
+
+    ProtectEnd();
 }
 
 static DWORD LastFrameTime = 0;
@@ -77,6 +86,8 @@ void Utils::LimitFPS(int targetfps)
 
 void Utils::RandomText(char *s, const int len) 
 {
+    ProtectStart();
+    
     static const char alphanum[] =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -87,4 +98,6 @@ void Utils::RandomText(char *s, const int len)
     }
 
     s[len] = 0;
+
+    ProtectEnd();
 }

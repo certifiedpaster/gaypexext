@@ -3,11 +3,13 @@
 
 CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o: ../src/activation/SlimMem.cc
 CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o: ../src/activation/SlimMem.h
+CMakeFiles/xepa.exe.dir/src/activation/SlimMem.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/activation/SlimMem.h
 CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/activation/activation.cc
 CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/activation/activation.h
 CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/console.h
+CMakeFiles/xepa.exe.dir/src/activation/activation.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/console.cc.o: ../src/console.cc
 CMakeFiles/xepa.exe.dir/src/console.cc.o: ../src/console.h
@@ -17,6 +19,7 @@ CMakeFiles/xepa.exe.dir/src/console.cc.o: ../src/globals.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.cc
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.h
+CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/driver.h
@@ -82,6 +85,7 @@ CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/imgui/imgui_impl_win32.h
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/main.cc
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/overlay.h
 CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/utils.h
+CMakeFiles/xepa.exe.dir/src/main.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/driver.h
@@ -95,10 +99,12 @@ CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/overlay.cc
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/overlay.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/style.h
 CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/utils.h
+CMakeFiles/xepa.exe.dir/src/overlay.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/charfix.h
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/legacy.h
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/utils.cc
 CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/utils.h
+CMakeFiles/xepa.exe.dir/src/utils.cc.o: ../src/vmprotect.h
 

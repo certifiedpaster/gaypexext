@@ -1,4 +1,5 @@
 #include <windows.h>
+#include "vmprotect.h"
 
 // meine proffessional processhacker copy-pasta from Rust project
 
@@ -111,6 +112,8 @@ RtlFreeHeap(
 
 bool MemoryReadable(char* ptr, size_t byteCount)
 {
+    ProtectStart();
+    
     MEMORY_BASIC_INFORMATION mbi;
     if (VirtualQuery(ptr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) == 0)
         return false;
@@ -135,11 +138,15 @@ bool MemoryReadable(char* ptr, size_t byteCount)
                             byteCount - blockBytesPostPtr);
 
     return true;
+
+    ProtectEnd();
 }
 
 char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress) 
 {
-	int bufferSize = 0x100;
+	ProtectStart();
+    
+    int bufferSize = 0x100;
 	char* buffer = (char*)malloc(bufferSize);
 	SIZE_T returnLength;
 
@@ -169,14 +176,14 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
     // completely retarded access violation
     if (!(MemoryReadable((char*)buffer, (sizeof(USHORT) * 2)))) 
     {
-        printf("[e] Invalid allocation at: %p\n", (char*)buffer);
+        printf(E("[e] Invalid allocation at: %p\n"), (char*)buffer);
         return 0;
     }
 
 	PUNICODE_STRING unistr = (PUNICODE_STRING)buffer;
     if (unistr->Length < 5 || unistr->Length >= 250) 
     {
-        printf("[e] Invalid size for: %p\n", (char*)unistr);
+        printf(E("[e] Invalid size for: %p\n"), (char*)unistr);
         return 0;
     }
 
@@ -189,20 +196,24 @@ char* GetFileNameFromMemory(HANDLE proc, PVOID baseaddress)
         WideCharToMultiByte(CP_ACP, 0, unistr->Buffer, unistr->Length, multi, unistr->Length, 0, 0);
         free(buffer);
 
-        printf("[m] %s\n", multi);
+        printf(E("[m] %s\n"), multi);
 
         return multi;
     } else 
     {
-        printf("[e] Invalid memory region at: %p\n", (char*)unistr);
+        printf(E("[e] Invalid memory region at: %p\n"), (char*)unistr);
         return 0;
     }
+
+    ProtectEnd();
 }
 
 #define PTR_ADD_OFFSET(Pointer, Offset) ((PVOID)((ULONG_PTR)(Pointer) + (ULONG_PTR)(Offset)))
 ModuleInfo GetProcessModules(int pid) 
 {
-	ModuleInfo mi = { 0 };
+	ProtectStart();
+    
+    ModuleInfo mi = { 0 };
 	MEMORY_BASIC_INFORMATION basicInfo;
 	int total = 0;
 
@@ -273,7 +284,7 @@ ModuleInfo GetProcessModules(int pid)
 				mi.list[total].name = filename;
 				mi.list[total].baseaddress = (uintptr_t)allocationBase;
 				total++;
-                if (strstr(filename, "r5apex.exe")) 
+                if (strstr(filename, E("r5apex.exe"))) 
                 {
                     CloseHandle(proc);
 	                return mi;
@@ -322,10 +333,14 @@ ModuleInfo GetProcessModules(int pid)
 
 	CloseHandle(proc);
 	return mi;
+
+    ProtectEnd();
 }
 
 uintptr_t GetBaseUsermode(int pid, const std::wstring modulename)
 {
+    ProtectStart();
+    
     HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
 	DWORD dwModuleBaseAddress = 0;
 	if (hSnapshot != INVALID_HANDLE_VALUE)
@@ -346,4 +361,6 @@ uintptr_t GetBaseUsermode(int pid, const std::wstring modulename)
 		CloseHandle(hSnapshot);
 	}
 	return dwModuleBaseAddress;
+
+    ProtectEnd();
 }

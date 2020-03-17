@@ -9,6 +9,8 @@
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.cc
 SlimMem.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
+../vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/SlimMem.h
 windows.h
@@ -41,6 +43,8 @@ activation.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
 ../console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
+../vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
 
@@ -81,6 +85,8 @@ driver.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
 console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
+vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
 windows.h
@@ -283,6 +289,8 @@ string.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/legacy.h
 windows.h
 -
+vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/main.cc
 charfix.h
@@ -299,6 +307,8 @@ utils.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
 activation/activation.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/activation/activation.h
+vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.cc
 globals.h
@@ -333,6 +343,8 @@ style.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/style.h
 utils.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
+vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/overlay.h
 imgui/imgui.h
@@ -405,8 +417,12 @@ legacy.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/legacy.h
 console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
+vmprotect.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/utils.h
 string
 -
+
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
 
