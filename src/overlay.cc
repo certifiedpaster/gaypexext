@@ -391,6 +391,24 @@ void Helper::RenderStatic()
     }     
 }
 
+static int keystatus = 0;
+void ChangeKey(void* blank) 
+{
+    keystatus = 1;
+    while (true) 
+    {
+        for (int i = 0; i < 0x87; i++) 
+        {
+            if (GetKeyState(i) & 0x8000)
+            {
+                g_Vars->settings.aim.aimkey = i;
+                keystatus = 0;
+                return;
+            }
+        }
+    }
+}
+
 void Helper::RenderMenu()
 {
     ImGuiWindowFlags windowflags = 0;
@@ -417,7 +435,17 @@ void Helper::RenderMenu()
             std::stringstream stream;
             stream << std::hex << g_Vars->settings.aim.aimkey;
             std::string aimkey = "Change aim key (" + stream.str() + ")";
-            ImGui::Button(aimkey.c_str()); // TODO: change
+            if (keystatus == 1) 
+            {
+                aimkey = "Press key to bind";
+            }
+            if (ImGui::Button(aimkey.c_str())) 
+            {
+                if (keystatus == 0) 
+                {
+                    CreateThread(0, 0, (LPTHREAD_START_ROUTINE)ChangeKey, nullptr, 0, nullptr);
+                }
+            }
 
             ImGui::Checkbox("Smooth", &g_Vars->settings.aim.smooth);
             ImGui::SliderInt("Divider", &g_Vars->settings.aim.divider, 100, 1000);

@@ -1,3 +1,6 @@
+# Build on Linux or using Linux subsystem for Windows
+# /mnt/c/Users/q/Desktop/amlegit/projects/xepa/build
+
 # Set minimum required version for CMAKE
 cmake_minimum_required(VERSION 3.10)
 
