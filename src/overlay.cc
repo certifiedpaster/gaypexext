@@ -326,7 +326,7 @@ void Render::Line(ImVec2 a, ImVec2 b, ImColor color, float thickness)
 
 void Render::EasyText(ImVec2 pos, ImColor color, const char* text) 
 {
-    Render::Text(pos, color, text, text + strlen(text), 500, 0);
+    Render::Text(pos, color, text, text + strlen(text), 800, 0);
 }
 
 void Render::DrawBox(ImColor color, int x, int y, int w, int h) 
@@ -465,9 +465,84 @@ void Helper::RenderMenu()
             ImGui::Checkbox(E("Shield"), &g_Vars->settings.visuals.shield);
             ImGui::Checkbox(E("Hightlight target"), &g_Vars->settings.visuals.showTarget);
             ImGui::Checkbox(E("FOV circle"), &g_Vars->settings.visuals.fovCircle);
+            ImGui::Checkbox(E("Hide teammates"), &g_Vars->settings.visuals.hideTeammates);
         }
-        if (ImGui::CollapsingHeader("About"))
+        if (ImGui::CollapsingHeader("Config/About"))
         {
+            ImGui::Text(E("Predefined configs"));
+            if (ImGui::Button(E("Legit")))
+            {  
+                g_Vars->settings.visuals.enabled = true;
+                g_Vars->settings.visuals.box = true;
+                g_Vars->settings.visuals.health = true;
+                g_Vars->settings.visuals.shield = true;
+                g_Vars->settings.visuals.showTarget = true;
+                g_Vars->settings.visuals.fovCircle = false;
+                
+                g_Vars->settings.aim.enabled = true;
+                g_Vars->settings.aim.maxfov = 5.0f;
+                g_Vars->settings.aim.nopunch = true;
+                g_Vars->settings.aim.maxdistance = 5000;
+                
+                g_Vars->settings.aim.smooth = true;
+                g_Vars->settings.aim.divider = 800;
+                
+                g_Vars->settings.aim.gravity = true;
+                g_Vars->settings.aim.velocity = true;
+                
+                g_Vars->settings.aim.teamCheck = true;
+                g_Vars->settings.aim.knockCheck = true;
+            }
+            ImGui::SameLine();
+            if (ImGui::Button(E("Normal"))) 
+            {
+                g_Vars->settings.visuals.enabled = true;
+                g_Vars->settings.visuals.box = true;
+                g_Vars->settings.visuals.health = true;
+                g_Vars->settings.visuals.shield = true;
+                g_Vars->settings.visuals.showTarget = true;
+                g_Vars->settings.visuals.fovCircle = false;
+                
+                g_Vars->settings.aim.enabled = true;
+                g_Vars->settings.aim.maxfov = 10.0f;
+                g_Vars->settings.aim.nopunch = true;
+                g_Vars->settings.aim.maxdistance = 5000;
+                
+                g_Vars->settings.aim.smooth = true;
+                g_Vars->settings.aim.divider = 200;
+                
+                g_Vars->settings.aim.gravity = true;
+                g_Vars->settings.aim.velocity = true;
+                
+                g_Vars->settings.aim.teamCheck = true;
+                g_Vars->settings.aim.knockCheck = true;
+            }
+            ImGui::SameLine();
+            if (ImGui::Button(E("Rage"))) 
+            {
+                g_Vars->settings.visuals.enabled = true;
+                g_Vars->settings.visuals.box = true;
+                g_Vars->settings.visuals.health = true;
+                g_Vars->settings.visuals.shield = true;
+                g_Vars->settings.visuals.showTarget = true;
+                g_Vars->settings.visuals.fovCircle = false;
+                
+                g_Vars->settings.aim.enabled = true;
+                g_Vars->settings.aim.maxfov = 180.0f;
+                g_Vars->settings.aim.nopunch = true;
+                g_Vars->settings.aim.maxdistance = 5000;
+                
+                g_Vars->settings.aim.smooth = false;
+                g_Vars->settings.aim.divider = 100;
+                
+                g_Vars->settings.aim.gravity = true;
+                g_Vars->settings.aim.velocity = true;
+                
+                g_Vars->settings.aim.teamCheck = true;
+                g_Vars->settings.aim.knockCheck = true;
+            }
+
+            ImGui::Text("");
             ImGui::Text(E("Copyright (c) 2020 amlegit.com - All rights reserved"));
             ImGui::Text(E("Build on: %s"), E(__DATE__));
             ImGui::Text(E("Build in: %s"), E(__TIME__));

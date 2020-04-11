@@ -5,7 +5,7 @@
 
 SlimUtils::SlimMem mem;
 #define LAUNCHER_PROCESS EW(L"llauncher.exe")
-#define LAUNCHER_OFFSET 0x58a10
+#define LAUNCHER_OFFSET 0x55d20
 
 bool Activation::Activate() 
 {

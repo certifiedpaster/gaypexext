@@ -19,6 +19,7 @@ CMakeFiles/xepa.exe.dir/src/console.cc.o: ../src/globals.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/console.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.cc
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/driver.h
+CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/globals.h
 CMakeFiles/xepa.exe.dir/src/driver.cc.o: ../src/vmprotect.h
 
 CMakeFiles/xepa.exe.dir/src/features/base.cc.o: ../src/console.h

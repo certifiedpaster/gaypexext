@@ -142,9 +142,7 @@ namespace SlimUtils {
     }
     
     SigScanResult SlimMem::PerformSigScan(const BYTE * bufPattern, const char * lpcstrMask, const wchar_t * lpwstrModuleName, DWORD startFromOffset)
-    {
-        ProtectStart();
-        
+    {       
         auto module = this->GetModule(lpwstrModuleName);
         if (module == nullptr)
             return SigScanResult(false);
@@ -184,8 +182,6 @@ namespace SlimUtils {
         delete[] dump;
     
         return SigScanResult(false);
-
-        ProtectEnd();
     }
     
     const SlimModule* SlimMem::GetModule(const wchar_t * lpwstrModuleName) const

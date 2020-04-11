@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document Version="2">
+    <Protection InputFileName="xepa.exe" Options="985032">
+        <Messages />
+        <Folders />
+        <Procedures>
+            <Procedure MapAddress='VMProtectMarker &quot;GetPID&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;GetModule&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;PerformSigScan&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;ParseModules&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;Open&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;Activate&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='string &quot;Invalid status reported from launcher&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Could not access launcher process!&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Launcher does not seem to be running!&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Launcher is running but user not logged in!&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Could not get launcher module!&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Activated&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Activating...&quot;' Index="0" Options="0" />
+            <Procedure MapAddress='string &quot;llauncher.exe&quot;' Options="0" />
+            <Procedure MapAddress='VMProtectMarker &quot;Init&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='string &quot;Connection initialized&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Failed to connect to the driver&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Driver handle: %p&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Initializing driver connection...&quot;' Index="0" Options="0" />
+            <Procedure MapAddress='string &quot;\\.\PhysicalDrive%i&quot;' Options="0" />
+            <Procedure MapAddress='VMProtectMarker &quot;OfflineOffsets&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;OfflineSettings&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;WinMain&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='string &quot;Getting program info...&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Game PID is %i&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;r5apex.exe&quot;' Index="0" Options="0" />
+            <Procedure MapAddress='string &quot;Game base address is %llx&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Exit signal received. Exiting.&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Failed to get process information&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Trying to connect to the driver...&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Test read: %i&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Using offsets from %s&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Creating threads...&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;r5apex.exe&quot;' Index="1" Options="0" />
+            <Procedure MapAddress='string &quot;%H:%M:%S&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;amlegit.com&#x0A;&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;amlegit.com&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Welcome fellow cheater!&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;To start please configure the cheat bellow. If you are not sure what &#x0A;options to use you can use one of our configs which is on our Discord.&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;You are currently using plus version.&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Aim&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Enable aim&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Visuals&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Not activated. Look at console.&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Predefined configs&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Legit&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Enable visuals&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Box&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Health&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Shield&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Hightlight target&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;FOV circle&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;Hide teammates&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;c:\Windows\Fonts\Arial.ttf&quot;' Options="0" />
+            <Procedure MapAddress='VMProtectMarker &quot;MemoryReadable&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;GetFileNameFromMemory&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='string &quot;[m] %s&#x0A;&quot;' Options="0" />
+            <Procedure MapAddress='string &quot;[e] Invalid size for: %p&#x0A;&quot;' Options="0" />
+            <Procedure MapAddress='VMProtectMarker &quot;GetProcessModules&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;FindProcess&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;GetBase&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='VMProtectMarker &quot;RandomText&quot;' Options="0" CompilationType="2" />
+            <Procedure MapAddress='string &quot;[e] Invalid memory region at: %p&#x0A;&quot;' Options="0" />
+        </Procedures>
+        <Objects />
+    </Protection>
+    <DLLBox>
+        <Folders />
+    </DLLBox>
+    <Script />
+    <LicenseManager />
+</Document>

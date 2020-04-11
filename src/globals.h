@@ -40,6 +40,7 @@ typedef struct _Visuals
     bool shield;
     bool showTarget;
     bool fovCircle;
+    bool hideTeammates;
 } Visuals;
 
 typedef struct _Aim 
@@ -86,6 +87,7 @@ typedef struct _GlobalVars
 extern GlobalVars* g_Vars;
 extern Driver* g_Drv;
 
-#define TESTBUILD true
+// comment to disable test build
+//#define TESTBUILD true
 
 #endif

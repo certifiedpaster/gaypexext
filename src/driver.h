@@ -6,32 +6,28 @@
 class Driver 
 {
 private:
-    HANDLE _handle;
-    ULONG _pid;
     bool _init;
+    int _pid;
+    HANDLE _drvhandle;
 
-    typedef struct _DrvIO
+    typedef struct _Command
     {
-        ULONG   ProcID;
-        ULONG64 pRemote;
-        ULONG   Size;
-        ULONG   Flag;
-    } DrvIO, *P_DrvIO;
-    typedef struct _DrvModInfo
-    {
-        ULONG64 ModBase;
-        ULONG   ModSize;
-    } DrvModInfo, *P_DrvModInfo;
-    typedef struct _DrvAllocInfo
-    {
-        ULONG64 AllocBase;
-        ULONG64 PhysBase;
-        ULONG64 AllocMdl;
-    } DrvAllocFreeInfo, *P_DrvAllocFreeInfo;
+        int action; // action to do
+        
+        int pid1; // client
+        int pid2; // target
+        int tid; // target thread id
 
-    void UnsafeRead(PVOID pTarget, PVOID pLocal, ULONG DataSize);
-    void UnsafeWrite(PVOID pTarget, PVOID pLocal, ULONG DataSize);
-    DrvAllocFreeInfo UnsafeAlloc(ULONG RegSize);
+        uintptr_t source;
+        uintptr_t destination;
+        uintptr_t size;
+
+        int* status; // return status
+    } Command;
+
+    void SendCommand(Command* command);
+    bool UnsafeRead(int pid, uintptr_t source, uintptr_t destination, uintptr_t size);
+    bool UnsafeWrite(int pid, uintptr_t source, uintptr_t destination, uintptr_t size);
 public:
     void Init(int pid);
 
@@ -42,7 +38,7 @@ public:
         if (!_init) 
             return val;
 
-        UnsafeRead((PVOID)address, (PVOID)&val, sizeof(T));
+        UnsafeRead(_pid, address, (uintptr_t)&val, sizeof(T));
         return val;
     }
 
@@ -52,7 +48,7 @@ public:
         if (!_init) 
             return;
 
-        UnsafeWrite((PVOID)address, (PVOID)&val, sizeof(T));
+        UnsafeWrite(_pid, (uintptr_t)&val, address, sizeof(T));
     }
 };
 

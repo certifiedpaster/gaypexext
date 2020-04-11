@@ -336,31 +336,3 @@ ModuleInfo GetProcessModules(int pid)
 
     ProtectEnd();
 }
-
-uintptr_t GetBaseUsermode(int pid, const std::wstring modulename)
-{
-    ProtectStart();
-    
-    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
-	DWORD dwModuleBaseAddress = 0;
-	if (hSnapshot != INVALID_HANDLE_VALUE)
-	{
-		MODULEENTRY32 ModuleEntry32 = { 0 };
-		ModuleEntry32.dwSize = sizeof(MODULEENTRY32);
-		if (Module32First(hSnapshot, &ModuleEntry32))
-		{
-			do
-			{
-				if (!modulename.compare(ModuleEntry32.szModule))
-				{
-					dwModuleBaseAddress = (uintptr_t)ModuleEntry32.modBaseAddr;
-					break;
-				}
-			} while (Module32Next(hSnapshot, &ModuleEntry32));
-		}
-		CloseHandle(hSnapshot);
-	}
-	return dwModuleBaseAddress;
-
-    ProtectEnd();
-}

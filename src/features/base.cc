@@ -55,6 +55,10 @@ void FeatureBase::Loop()
                 if (player->Team() == localteam) 
                 {
                     defaultcolor = GREEN;
+                    if (g_Vars->settings.visuals.hideTeammates) 
+                    {
+                        continue;
+                    }
                 }
                 if (player->Knocked()) 
                 {

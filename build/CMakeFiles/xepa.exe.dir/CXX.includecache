@@ -87,6 +87,8 @@ console.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/console.h
 vmprotect.h
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/vmprotect.h
+globals.h
+/mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/globals.h
 
 /mnt/c/Users/q/Desktop/amlegit/projects/xepa/src/driver.h
 windows.h
@@ -127,7 +129,7 @@ stddef.h
 -
 stdint.h
 -
-Windows.h
+windows.h
 -
 windows.h
 -

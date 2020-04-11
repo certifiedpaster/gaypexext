@@ -2,67 +2,93 @@
 #include "driver.h"
 #include "console.h"
 #include "vmprotect.h"
+#include "globals.h"
 
-#define IOCTL_READ CTL_CODE(FILE_DEVICE_UNKNOWN, 0x9372, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
-void Driver::UnsafeRead(PVOID pTarget, PVOID pLocal, ULONG DataSize)
+typedef struct _Command
 {
-	if (!DataSize) return;
-	DrvIO OutData = { _pid, (ULONGLONG)pTarget, DataSize };
-	DeviceIoControl(_handle, IOCTL_READ, &OutData, sizeof(OutData), pLocal, DataSize, NULL, NULL);
+    int action; // action to do
+
+    int pid1; // client
+    int pid2; // target
+    int tid; // target thread id
+
+    uintptr_t source;
+    uintptr_t destination;
+    uintptr_t size;
+
+    int* status; // return status
+} Command;
+#define IOCTL_SENDCOMMAND CTL_CODE(FILE_DEVICE_UNKNOWN, 0xDEAD, METHOD_IN_DIRECT, FILE_ANY_ACCESS)
+
+void Driver::SendCommand(Driver::Command* command) 
+{   
+    DeviceIoControl(_drvhandle, IOCTL_SENDCOMMAND, command, sizeof(Command), command, sizeof(Command), NULL, NULL);
 }
 
-#define IOCTL_WRITE CTL_CODE(FILE_DEVICE_UNKNOWN, 0x1730, METHOD_IN_DIRECT, FILE_ANY_ACCESS)
-void Driver::UnsafeWrite(PVOID pTarget, PVOID pLocal, ULONG DataSize)
-{
-	if (!DataSize) return;
-	DrvIO OutData = { _pid, (ULONGLONG)pTarget, DataSize };
-	DeviceIoControl(_handle, IOCTL_WRITE, &OutData, sizeof(OutData), pLocal, DataSize, NULL, NULL);
+bool Driver::UnsafeRead(int pid, uintptr_t source, uintptr_t destination, uintptr_t size) 
+{    
+    int status = 0;
+
+    Command* c = new Command();
+    c->action = 1;
+    c->pid2 = pid;
+    c->pid1 = GetCurrentProcessId();
+    c->status = &status;
+    c->source = source;
+    c->destination = destination;
+    c->size = size;
+
+    SendCommand(c);
+
+    return (status == 20);
 }
 
-#define IOCTL_ALLOC CTL_CODE(FILE_DEVICE_UNKNOWN, 0x9261, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
-Driver::DrvAllocFreeInfo Driver::UnsafeAlloc(ULONG RegSize)
+bool Driver::UnsafeWrite(int pid, uintptr_t source, uintptr_t destination, uintptr_t size)
 {
-	DrvIO OutData = { _pid, 0, RegSize }; DrvAllocFreeInfo Addr = { 0 };
-	DeviceIoControl(_handle, IOCTL_ALLOC, &OutData, sizeof(OutData), &Addr, sizeof(Addr), NULL, NULL);
-	return Addr;
+    int status = 0;
+
+    Command* c = new Command();
+    c->action = 2;
+    c->pid2 = pid;
+    c->pid1 = GetCurrentProcessId();
+    c->status = &status;
+    c->source = source;
+    c->destination = destination;
+    c->size = size;
+
+    SendCommand(c);
+
+    return (status == 20);
 }
 
 void Driver::Init(int pid) 
 {
     ProtectStart();
     
-    _pid = pid;
-    HANDLE drvhandle = CreateFileW(EW(L"\\\\.\\GpuEnergyDrv"), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (drvhandle == INVALID_HANDLE_VALUE || !drvhandle) 
+    Console::WriteLog(E("Initializing driver connection..."));
+
+    if (!_drvhandle) 
     {
-        Console::WriteLog(E("Failed to open driver handle!"));
-    } else 
-    {
-        _handle = drvhandle;
-        _init = true;
-        Console::WriteLog(E("Handle: %p"), _handle);
+        for (int i = 0; i < 10; i++)
+        {
+            wchar_t buffer[20];
+            wsprintfW(buffer, EW(L"\\\\.\\PhysicalDrive%i"), i);
+            _drvhandle = CreateFileW(buffer, GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+            if (!(_drvhandle == INVALID_HANDLE_VALUE || !_drvhandle))
+            {
+                Console::WriteLog(E("Driver handle: %p"), _drvhandle);
+                break;
+            }
+        }
+        if (_drvhandle == INVALID_HANDLE_VALUE || !_drvhandle)
+        {
+            Console::WriteLog(E("Failed to connect to the driver"));
+        }
     }
+
+    _init = true;
+    _pid = pid;
+    Console::WriteLog(E("Connection initialized"));
 
     ProtectEnd();
 }
-
-/*
-template<typename T>
-T Driver::Read(uintptr_t address) 
-{
-    T val = T();    
-    if (!_init) 
-        return val;
-    
-    UnsafeRead(address, &val, sizeof(T));
-    return val;
-}
-
-template<typename T>
-void Driver::Write(uintptr_t address, T val) 
-{
-    if (!_init) 
-        return;
-    
-    UnsafeWrite(address, &val, sizeof(T));
-}*/
