@@ -376,7 +376,7 @@ void Render::Progress(int x, int y, int w, int h, int phealth)
 
 void Helper::RenderStatic() 
 {      
-    std::string toptext = E("amlegit.com\n");
+    std::string toptext = E("hq cheat name here\n");
 	toptext += GetTime();
 	const char* text = toptext.c_str();
     Render::EasyText(ImVec2(10, 10), ImColor(ImVec4(1.0f, 1.0f, 1.0f, 1.0f)), text);
